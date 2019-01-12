@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ./partials/head.ejs %>
+  </head>
+  <body>
+
+    <% include ./partials/navbar.ejs %>
+
+      <!-- Page Content -->
+      <main class="container">
+
+        <!-- Jumbotron Header -->
+        <header class="jumbotron my-4">
+          <h1 class="display-3">Welcome to Moviephile!</h1>
+          <p class="lead">An application for movie lovers to store and share information about their favorite movies.</p>
+          <a href="#" class="btn btn-primary btn-lg">Sign up</a>
+        </header>
+
+        <!-- Page Features -->
+        <section class="row text-center">
+
+          <section class="col-lg-4">
+            <h4 class="card-title">Evaluate</h4>
+            <p class="card-text">Review, rate, and rank all of your favorite (and not so favorite) movies.</p>
+          </section>
+
+          <section class="col-lg-4">
+            <h4 class="card-title">Unwatched Movies?</h4>
+            <p class="card-text">Keep track of all those movies you want to watch some day.</p>
+          </section> 
+
+          <section class="col-lg-4">
+            <h4 class="card-title">Share with Friends</h4>
+            <p class="card-text">Share all of your movie information with your friends.</p>
+          </section>
+
+        </section>
+        <!-- /.row -->
+
+      </main>
+      <!-- /.container -->
+
+      <% include ./partials/baseScripts.ejs %>
+    </body>
+</html>
