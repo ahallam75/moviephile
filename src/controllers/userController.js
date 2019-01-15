@@ -1,5 +1,6 @@
 const userQueries = require("../db/queries.users.js");
 const passport = require("passport");
+const sgMail = require('@sendgrid/mail');
 
 module.exports = {
     signUp(req, res, next){
@@ -21,6 +22,15 @@ module.exports = {
              } else {
                passport.authenticate("local")(req, res, () => {
                  req.flash("notice", "You've successfully signed in!");
+                 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+                 const msg = {
+                   to: user.email,
+                   from: 'support@moviephile.com',
+                   subject: 'Welcome to Moviephile!',
+                   text: `Welcome to Moviephile ${user.email}!`,
+                   html: `<strong>Welcome to Moviephile ${user.email}!</strong>`,
+                 };
+                 sgMail.send(msg);
                  res.redirect("/");
                })
              }
