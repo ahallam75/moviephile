@@ -2,6 +2,7 @@ const request = require("request");
 const server = require("../../src/server");
 const base = "http://localhost:3000/users/";
 const User = require("../../src/db/models").User;
+const Movie = require("../../src/db/models").Movie;
 const sequelize = require("../../src/db/models/index").sequelize;
 
 describe("routes : users", () => {
@@ -85,5 +86,30 @@ describe("routes : users", () => {
         });
     
       });
+
+  describe("GET /users/:email", () => {
+
+     beforeEach((done) => {
+       this.user;
+       
+       User.create({
+         email: "starman@tesla.com",
+         password: "Trekkie4lyfe"
+       })
+       .then((res) => {
+         this.user = res;
+         done();
+       })
+     })
+
+     it("should list the user's email", (done) => {
+
+       request.get(`${base}${this.user.email}`, (err, res, body) => {
+         expect(body).toContain("user@example.com");
+         done();
+       });
+
+     });
+   });    
 
 });
