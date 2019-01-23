@@ -87,7 +87,7 @@ describe("routes : users", () => {
     
       });
 
-  describe("GET /users/:email", () => {
+  describe("GET /users/:id", () => {
 
      beforeEach((done) => {
        this.user;
@@ -104,7 +104,7 @@ describe("routes : users", () => {
 
      it("should list the user's email", (done) => {
 
-       request.get(`${base}${this.user.email}`, (err, res, body) => {
+       request.get(`${base}${this.user.id}`, (err, res, body) => {
          expect(body).toContain("user@example.com");
          done();
        });

@@ -2,8 +2,8 @@
 module.exports = (sequelize, DataTypes) => {
   var Movie = sequelize.define('Movie', {
     title: DataTypes.STRING,
-    year: DataTypes.STRING,
-    director: DataTypes.INTEGER,
+    year: DataTypes.INTEGER,
+    director: DataTypes.STRING,
     userId: {
       type: DataTypes.INTEGER,
       onDelete: "CASCADE",
