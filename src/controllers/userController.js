@@ -63,9 +63,9 @@ module.exports = {
 
     show(req, res, next){
        userQueries.getUser(req.params.id, (err, result) => {
-        
+         console.log("This is 'result' from 'show': ", result);
+         //console.log("This is the err from show: ", err);
          if(err || result.user === undefined){
-          //console.log("This is the user: ", result);
            req.flash("notice", "No user found with that ID.");
            res.redirect("/");
          } else {

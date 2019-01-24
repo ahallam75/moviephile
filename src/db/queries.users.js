@@ -40,7 +40,8 @@ module.exports = {
           callback(404);
         } else {
           result["user"] = user;
-          console.log("This is the user: ", user);
+         //console.log("This is 'result' from 'getUser': ", result);
+         //console.log("This is the err from getUser: ", err);
         }
       })
       .catch((err) => {
