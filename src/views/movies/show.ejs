@@ -11,19 +11,15 @@
 
       <% include ../static/partials/messages.ejs %>
 
-      <h1><%= `${user.email}'s Movie Page!` %></h1>
+      <h1><%= `${user.email}'s Movie List` %></h1>
 
       <hr>
 
       <section class="col-lg-4">
         <h4 class="card-title">Movie List</h4>
-        <p class="card-text">Click on the button below to view and edit your personalized movie list.</p>
-        <a href="/users/sign_up" class="btn btn-danger btn-lg">Sign up</a>
+        <p class="card-text">Add movies to your list</p>
+        <a href="/movies/new" class="btn btn-danger btn-lg">Add Movie</a>
       </section>
-
-      <!-- <h2> Movies </h2> -->
-
-    
 
       <hr>
 

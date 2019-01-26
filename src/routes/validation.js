@@ -1,11 +1,12 @@
 module.exports = {
-    /*validatePosts(req, res, next) { //This is for validating posts, which will need to be changed for movies once the proper movie resource is written.
+    validateMovies(req, res, next) { 
   
       if(req.method === "POST") {
   
-        req.checkParams("topicId", "must be valid").notEmpty().isInt();
-        req.checkBody("title", "must be at least 2 characters in length").isLength({min: 2});
-        req.checkBody("body", "must be at least 10 characters in length").isLength({min: 10});
+        req.checkParams("userId", "must be valid").notEmpty().isInt();
+        req.checkBody("title", "must be at least 1 characters in length").isLength({min: 1});
+        req.checkBody("year", "must be at least 4 characters in length").isLength({min: 4});
+        req.checkBody("director", "must be at least 2 characters in length").isLength({min: 2});
       }
   
       const errors = req.validationErrors();
@@ -17,7 +18,7 @@ module.exports = {
       } else {
         return next();
       }
-    }, */
+    }, 
 
     validateUsers(req, res, next) {
       if(req.method === "POST") {

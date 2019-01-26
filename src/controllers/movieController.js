@@ -1,113 +1,84 @@
 const movieQueries = require("../db/queries.movies.js");
-//const Movie = require('../models').Movie;
-//const User = require('../models').User;
 
 module.exports = {
-  list(req, res) {
-    return Movie
-      .findAll({
-        include: [{
-          model: User,
-          as: 'users'
-        }],
-      })
-      .then((movies) => res.status(200).send(movies))
-      .catch((error) => { res.status(400).send(error); });
-  },
 
-  getById(req, res) {
-    return Movie
-      .findById(req.params.id, {
-        include: [{
-          model: User,
-          as: 'users'
-        }],
-      })
-      .then((movie) => {
-        if (!movie) {
-          return res.status(404).send({
-            message: 'Movie Not Found',
-          });
-        }
-        return res.status(200).send(movie);
-      })
-      .catch((error) => res.status(400).send(error));
-  },
+  new(req, res, next){
+    if(currentUser) {
+        res.render("movies/new", {userId: req.params.userId});
+    } else {
+        res.redirect("/movies/");
+    }
+},
 
-  add(req, res) {
-    return Movie
-      .create({
-        movie_name: req.body.movie_name,
-      })
-      .then((movie) => res.status(201).send(movie))
-      .catch((error) => res.status(400).send(error));
-  },
+create(req, res, next){
 
-  addUser(req, res) {
-    return Movie
-      .findById(req.body.movie_id, {
-        include: [{
-          model: User,
-          as: 'users'
-        }],
-      })
-      .then((movie) => {
-        if (!movie) {
-          return res.status(404).send({
-            message: 'Movie Not Found',
-          });
-        }
-        User.findById(req.body.movie_id).then((course) => {
-          if (!course) {
-            return res.status(404).send({
-              message: 'User Not Found',
-            });
+  if(currentUser){
+      let newMovie = {
+          title: req.body.title,
+          year: req.body.year,
+          director: req.body.director,
+          userId: req.user.id
+      };
+      movieQueries.addMovie(newMovie, (err, movie) => {
+          if(err){
+              res.redirect(500, "/movies/new");
+          } else {
+              res.redirect(303, `/users/${newMovie.userId}/movies/${movie.id}`);
           }
-          movie.addUser(course);
-          return res.status(200).send(movie);
-        })
-      })
-      .catch((error) => res.status(400).send(error));
-  },
+      });
+  } else {
+      res.redirect("/movies");
+  }
+},
 
-  update(req, res) {
-    return Movie
-      .findById(req.params.id, {
-        include: [{
-          model: User,
-          as: 'users'
-        }],
-      })
-      .then(movie => {
-        if (!movie) {
-          return res.status(404).send({
-            message: 'Movie Not Found',
-          });
-        }
-        return movie
-          .update({
-            movie_name: req.body.movie_name || classroom.movie_name,
-          })
-          .then(() => res.status(200).send(movie))
-          .catch((error) => res.status(400).send(error));
-      })
-      .catch((error) => res.status(400).send(error));
-  },
+show(req, res, next){
+  postQueries.getMovie(req.params.id, (err, movie) => {
+      if(err || movie == null){
+          res.redirect(404, "/");
+      } else {
+          res.render("movies/show", {movie});
+      }
+  });
+},
 
-  delete(req, res) {
-    return Movie
-      .findById(req.params.id)
-      .then(movie => {
-        if (!movie) {
-          return res.status(400).send({
-            message: 'Movie Not Found',
-          });
-        }
-        return movie
-          .destroy()
-          .then(() => res.status(204).send())
-          .catch((error) => res.status(400).send(error));
-      })
-      .catch((error) => res.status(400).send(error));
-  },
+destroy(req, res, next){
+  postQueries.deleteMovie(req, (err, deletedRecordsCount) => { 
+    if(err){ 
+      console.log(err);
+      res.redirect(500, `/users/${req.params.userId}/movies/${req.params.id}`) 
+    } else { 
+      console.log("There was no error");
+      res.redirect(303, `/users/${req.params.userId}`) 
+    } 
+  }); 
+}, 
+
+edit(req, res, next){
+  movieQueries.getMovie(req.params.id, (err, movie) => {
+      if(err || movie == null){
+          res.redirect(404, "/");
+      } else {
+
+          if(currentUser){
+              res.render("movies/edit", {movie});
+          } else {
+              req.flash("Attempt to edit failed.");
+              res.redirect(`/movies/${req.params.id}`);
+          }        
+      }
+  });
+},
+
+update(req, res, next) {
+  movieQueries.updateMovie(req, req.body, (err, movie) => {
+      if (err || movie == null) {
+          res.redirect(404, `/users/${req.params.userId}/movies/${req.params.id}/edit`);
+      } else {
+          res.redirect(`/movies/${req.params.movieId}/movies/${req.params.id}`);
+      }
+  });
+},
+
+
+
 };
