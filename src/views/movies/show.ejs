@@ -4,25 +4,41 @@
     <% include ../static/partials/head.ejs %>
   </head>
   <body>
-
     <% include ../static/partials/navbar.ejs %>
 
     <main class="container">
-
       <% include ../static/partials/messages.ejs %>
-
-      <h1><%= `${user.email}'s Movie List` %></h1>
-
-      <hr>
-
-      <section class="col-lg-4">
-        <h4 class="card-title">Movie List</h4>
-        <p class="card-text">Add movies to your list</p>
-        <a href="/movies/new" class="btn btn-danger btn-lg">Add Movie</a>
+      <div style="display: flex; align-items:center;">
+      <h1><%= movie.title %></h1>
+    </div>
+      <% if (currentUser && (currentUser.isAdmin() || currentUser.id == post.userId)) { %>
+        <a href="/topics/<%= post.topicId %>/posts/<%= post.id %>/edit" class="btn btn-warning">Edit</a>
+        <form style="display:initial" action="/topics/<%= post.topicId %>/posts/<%= post.id %>/destroy" method="post">
+          <input type="hidden" name="_method" value="PUT"> 
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      <% } %>
+      <% if(currentUser) { %>
+        <% include ../favorites/favoriting.ejs %>
+      <% } %>
+      <p><%= post.body %></p>
+      <section id="comment-form">
+          <!-- #1 -->
+             <% if(currentUser) { %>
+               <% include ../comments/new.ejs %>
+             <% } %>
       </section>
-
-      <hr>
-
+         
+          <!-- #2 -->
+      <section id="comment-list">
+             <% if(post.comments) { %>
+               <% post.comments.forEach((comment) => { %>
+         
+          <!-- #3 -->
+                 <%- include("../comments/show.ejs", {comment}) %>
+               <% }) %>
+             <% } %>
+      </section>
     </main>
 
     <% include ../static/partials/baseScripts.ejs %>
