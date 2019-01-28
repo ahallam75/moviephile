@@ -1,12 +1,13 @@
 const sequelize = require("../../src/db/models/index").sequelize;
 const User = require("../../src/db/models").User;
 const Movie = require("../../src/db/models").Movie;
+//const UserMovie = require("../../src/db/models").UserMovie;
 
 describe("Movie", () => {
 
   beforeEach((done) => {
 
-    this.user;
+    //this.user;
     this.movie;
     sequelize.sync({force: true}).then((res) => {
 
@@ -84,6 +85,43 @@ describe("Movie", () => {
     });
 
   });
+
+  describe("#setUser()", () => {
+
+    it("should associate a user and a movie together", (done) => {
+
+      User.create({
+        email: "user@example.com",
+        password: "fakepassword123"
+      })
+      .then((newUser) => {
+        expect(this.movie.userId).toBe(this.user.id);
+
+        this.movie.setUser(newUser)
+        .then((movie) => {
+          expect(movie.userId).toBe(newUser.id);
+          done();
+
+        });
+      })
+    });
+
+  });
+
+  describe("#getUser()", () => {
+
+    it("should return the associated user", (done) => {
+
+      this.movie.getUser()
+      .then((associatedUser) => {
+        expect(associatedUser.email).toBe("user@example.com");
+        done();
+      });
+
+    });
+
+  });
+  
 
 
 });

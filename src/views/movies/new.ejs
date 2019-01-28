@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../static/partials/head.ejs %>
+  </head>
+  <body>
+    <% include ../static/partials/navbar.ejs %>
+
+    <main class="container">
+      <h1>New Movie</h1>
+
+      <form action="/users/<%= userId %>/movies/create" method="post">
+        <div class="form-group">
+          <label for="title">Movie title</label>
+          <input type="text" class="form-control" name="title" aria-describedby="titleHelp" placeholder="Enter Title">
+        </div>
+        <div class="form-group">
+          <label for="year">Movie year</label>
+          <textarea rows="4" class="form-control" name="year" placeholder="Enter Movie Year"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="director">Movie director</label>
+            <textarea rows="4" class="form-control" name="director" placeholder="Enter Movie Director"></textarea>
+          </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+    </main>
+
+    <% include ../static/partials/baseScripts.ejs %>
+
+  </body>
+</html>

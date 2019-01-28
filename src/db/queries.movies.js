@@ -43,21 +43,43 @@ module.exports = {
         })
   },
 
-  getMovie(id, callback) {  
+  getMovie(id, callback){
+    return Movie.findById(id)
+    .then((movie) => {
+      callback(null, movie);
+    })
+    .catch((err) => {
+      callback(err);
+    })
+  },
+
+  /*getMovie(id, callback) {  
     return Movie.findById(id, {
         include: [
           {model: User}
         ]
     })
     .then((post) => {
-        callback(null, post);
+        callback(null, movie);
     })
     .catch((err) => {
         callback(err);
     })
+  }, */
+
+  deleteMovie(id, callback){
+    return Movie.destroy({
+      where: { id }
+    })
+    .then((deletedRecordsCount) => {
+      callback(null, deletedRecordsCount);
+    })
+    .catch((err) => {
+      callback(err);
+    })
   },
 
-  deleteMovie(req, callback) { 
+  /*deleteMovie(req, callback) { 
     return Movie.findById(req.params.id) 
         .then((movie) => {
             if(currentUser) {
@@ -72,7 +94,7 @@ module.exports = {
         .catch((err) => {
             callback(err);
         });
-  },
+  }, */
 
   updateMovie(req, updatedMovie, callback) { 
     return Movie.findById(req.params.id)
@@ -81,24 +103,17 @@ module.exports = {
             if (!movie) {
                 return callback("Movie not found");
             }
-
-            if(currentUser) {
-
-                movie.update(updatedMovie, {
-                    fields: Object.keys(updatedMovie)
-                })
-                .then(() => {
-                    callback(null, movie);
-                })
-                .catch((err) => {
-                    callback(err);
-                });
-            } else {
-                req.flash("notice", "Update failed.");
-                callback("Forbidden");
-            }
-      });
-  }
+            movie.update(updatedMovie, {
+                fields: Object.keys(updatedMovie)
+              })
+              .then(() => {
+                callback(null, movie);
+              })
+              .catch((err) => {
+                callback(err);
+              });
+            });
+          }
 
   
 };

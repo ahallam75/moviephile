@@ -2,12 +2,12 @@ const movieQueries = require("../db/queries.movies.js");
 
 module.exports = {
 
-  new(req, res, next){
-    if(currentUser) {
-        res.render("movies/new", {userId: req.params.userId});
-    } else {
-        res.redirect("/movies/");
-    }
+new(req, res, next){
+  if(currentUser) {
+    res.render("movies/new", {userId: req.params.userId});
+  } else {
+    res.redirect("/users/");
+  }
 },
 
 create(req, res, next){
@@ -26,28 +26,24 @@ create(req, res, next){
               res.redirect(303, `/users/${newMovie.userId}/movies/${movie.id}`);
           }
       });
-  } else {
-      res.redirect("/movies");
-  }
+    }
 },
 
 show(req, res, next){
-  postQueries.getMovie(req.params.id, (err, movie) => {
+  movieQueries.getMovie(req.params.id, (err, movie) => {
       if(err || movie == null){
           res.redirect(404, "/");
       } else {
-          res.render("movies/show", {movie});
+          res.render("users/show", {movie}); //The movies should display in the user's "My Movie" page.
       }
   });
 },
 
 destroy(req, res, next){
-  postQueries.deleteMovie(req, (err, deletedRecordsCount) => { 
+  movieQueries.deleteMovie(req, (err, deletedRecordsCount) => { 
     if(err){ 
-      console.log(err);
       res.redirect(500, `/users/${req.params.userId}/movies/${req.params.id}`) 
     } else { 
-      console.log("There was no error");
       res.redirect(303, `/users/${req.params.userId}`) 
     } 
   }); 

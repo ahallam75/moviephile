@@ -1,4 +1,5 @@
 const User = require("./models").User;
+const Movie = require("./models").Movie;
 const bcrypt = require("bcryptjs");
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -30,9 +31,16 @@ module.exports = {
     })
   },
 
+
   getUser(id, callback) {
     let result = {};
-    User.findById(id)
+    //return User.findById(id)
+    return User.findById(id, {
+      include: [{
+        model: Movie,
+        as: "movies"
+      }]
+    }) 
     .then((user) => {
       if (!user) {
         callback(404);
@@ -45,5 +53,6 @@ module.exports = {
         callback(err);
         })
   } 
+  
   
 }
