@@ -1,18 +1,14 @@
 const movieQueries = require("../db/queries.movies.js");
+const passport = require("passport");
 
 module.exports = {
 
 new(req, res, next){
-  if(currentUser) {
-    res.render("movies/new", {userId: req.params.userId});
-  } else {
-    res.redirect("/users/");
-  }
+  res.render("movies/new", {userId: req.params.userId});
 },
 
 create(req, res, next){
 
-  if(currentUser){
       let newMovie = {
           title: req.body.title,
           year: req.body.year,
@@ -26,7 +22,6 @@ create(req, res, next){
               res.redirect(303, `/users/${newMovie.userId}/movies/${movie.id}`);
           }
       });
-    }
 },
 
 show(req, res, next){
@@ -50,20 +45,15 @@ destroy(req, res, next){
 }, 
 
 edit(req, res, next){
-  movieQueries.getMovie(req.params.id, (err, movie) => {
+    movieQueries.getMovie(req.params.id, (err, movie) => {
+      console.log("This is the console.log for 'movie': ", movie);
       if(err || movie == null){
-          res.redirect(404, "/");
+        res.redirect(404, "/");
       } else {
-
-          if(currentUser){
-              res.render("movies/edit", {movie});
-          } else {
-              req.flash("Attempt to edit failed.");
-              res.redirect(`/movies/${req.params.id}`);
-          }        
+        res.render("movies/edit", {movie});
       }
-  });
-},
+    });
+  },
 
 update(req, res, next) {
   movieQueries.updateMovie(req, req.body, (err, movie) => {
