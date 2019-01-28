@@ -33,7 +33,7 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   },*/
 
-  addMovie(newMovie, callback) {  //Posts
+  addMovie(newMovie, callback) {  
     return Movie.create(newMovie)
         .then((movie) => {
             callback(null, movie);
@@ -43,7 +43,7 @@ module.exports = {
         })
   },
 
-  getMovie(id, callback) {  //Posts
+  getMovie(id, callback) {  
     return Movie.findById(id, {
         include: [
           {model: User}
@@ -57,7 +57,7 @@ module.exports = {
     })
   },
 
-  deleteMovie(req, callback) { //Posts
+  deleteMovie(req, callback) { 
     return Movie.findById(req.params.id) 
         .then((movie) => {
             if(currentUser) {
@@ -74,7 +74,7 @@ module.exports = {
         });
   },
 
-  updateMovie(req, updatedMovie, callback) { //Posts
+  updateMovie(req, updatedMovie, callback) { 
     return Movie.findById(req.params.id)
         .then((movie) => {
 
