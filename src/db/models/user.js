@@ -15,6 +15,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   
   User.associate = function(models) {
+    User.hasMany(models.Movie, {
+      foreignKey: "userId",
+    });
     User.belongsToMany(models.Movie, {
       through: 'UserMovie',
       as: 'movies',

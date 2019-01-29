@@ -1,5 +1,6 @@
 const Movie = require('./models').Movie;
 const User = require('./models').User;
+//const UserMovie = require('./models').UserMovie;
 
 module.exports = {
   /*list(req, res) {
@@ -43,7 +44,7 @@ module.exports = {
         })
   },
 
-  getMovie(id, callback){
+ /* getMovie(id, callback){
     return Movie.findById(id)
     .then((movie) => {
       callback(null, movie);
@@ -51,21 +52,39 @@ module.exports = {
     .catch((err) => {
       callback(err);
     })
-  },
+  }, */
 
   /*getMovie(id, callback) {  
     return Movie.findById(id, {
         include: [
-          {model: User}
-        ]
+          {model: User,
+          as: "users"
+        }]
     })
-    .then((post) => {
+    .then((movie) => {
         callback(null, movie);
     })
     .catch((err) => {
         callback(err);
     })
   }, */
+
+  getMovie(id, callback) {  
+    return User.findById(id, {
+        include: [
+          {model: Movie,
+          as: "movies"
+        }]
+    })
+    .then((user) => {
+        callback(null, user);
+    })
+    .catch((err) => {
+        callback(err);
+    })
+  },
+
+  
 
   deleteMovie(id, callback){
     return Movie.destroy({

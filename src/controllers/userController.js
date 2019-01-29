@@ -59,6 +59,8 @@ module.exports = {
       res.redirect("/");
     },
 
+    
+
     show(req, res, next){
        userQueries.getUser(req.params.id, (err, result) => {
         console.log("This is the console.log for 'result': ", result);
@@ -71,6 +73,8 @@ module.exports = {
          }
        });
      }
+    
 
+    
 
   }

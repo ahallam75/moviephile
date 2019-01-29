@@ -1,5 +1,6 @@
 const User = require("./models").User;
-//const Movie = require("./models").Movie;
+const Movie = require("./models").Movie;
+const UserRole = require('./models').UserRole;
 const bcrypt = require("bcryptjs");
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);

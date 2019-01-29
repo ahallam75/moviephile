@@ -15,7 +15,10 @@ create(req, res, next){
           director: req.body.director,
           userId: req.user.id
       };
+      
       movieQueries.addMovie(newMovie, (err, movie) => {
+        console.log("Here is the message: ", err);
+        console.log("Here is the message: ", movie);
           if(err){
               res.redirect(500, "/movies/new");
           } else {
@@ -46,7 +49,6 @@ destroy(req, res, next){
 
 edit(req, res, next){
     movieQueries.getMovie(req.params.id, (err, movie) => {
-      console.log("This is the console.log for 'movie': ", movie);
       if(err || movie == null){
         res.redirect(404, "/");
       } else {
