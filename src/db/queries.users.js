@@ -31,6 +31,7 @@ module.exports = {
     })
   },
 
+
   getUser(id, callback) {
     let result = {};
     //return User.findById(id)
@@ -44,8 +45,8 @@ module.exports = {
       if (!user) {
         callback(404);
       } else {
-        //result["user"] = user;
-        callback(null, result);
+        result["user"] = user;
+        callback(null, user);
       }
     })
         .catch((err) => {

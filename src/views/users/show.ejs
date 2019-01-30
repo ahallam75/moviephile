@@ -27,28 +27,43 @@
 
       <hr>
 
-      <ul class="list-group">
-        <% result.user.movies.forEach((movie) => { %>
-          <li class="list-group-item">
-           <a href="/users/<%= user.id %>/movies/<%= movie.id %>"> <%= movie.title %> </a>
-          </li>
-        <% }) %>
-      </ul>
+      <section class="row text-center"></section>
 
-      <hr>
+      <ul class="list-group"> 
+        <% user.movies.forEach((movie) => { %>  
+          
+        <section class="col-lg-4">
+            <h2 class="card-title">Title:</h2>
+            <h4><%= movie.title %></h4>   
 
-      
-        <h1><%= movie.title %></h1>
-
-          <a href="/users/<%= movie.userId %>/movies/<%= movie.id %>/edit" class="btn btn-warning">Edit</a>
+        <a href="/users/<%= movie.userId %>/movies/<%= movie.id %>/edit" class="btn btn-danger">Edit</a>
         
           <form style="display:initial" action="/users/<%= movie.userId %>/movies/<%= movie.id %>/destroy" method="post">
             <button type="submit" class="btn btn-danger">Delete</button>
           </form>
-  
-        <p><%= movie.year %></p>
+        </section>
 
-        <p><%= movie.director %></p>
+        <section class="col-lg-4">
+        <p><%= movie.year %></p>
+      </section>
+        
+        <section class="col-lg-4">
+        <p><%= movie.director %></p> 
+      </section>
+        
+        <% }) %> 
+      </ul> 
+
+      </section>
+
+
+
+          <section class="col-lg-4">
+            <h4 class="card-title">Evaluate Movies</h4>
+            <p class="card-text">Review, rate, and rank all of your favorite (and not so favorite) movies.</p>
+          </section>
+      
+        
     </main>
 
     <% include ../static/partials/baseScripts.ejs %>
