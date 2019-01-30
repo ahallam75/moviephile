@@ -29,6 +29,7 @@ create(req, res, next){
 
 show(req, res, next){
   movieQueries.getMovie(req.params.id, (err, movie) => {
+      console.log("This is the movie: ", movie);
       if(err || movie == null){
           res.redirect(404, "/");
       } else {

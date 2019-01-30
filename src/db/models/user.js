@@ -13,17 +13,13 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   }, {});
-  
-  User.associate = function(models) {
-    User.hasMany(models.Movie, {
-      foreignKey: "userId",
-    });
-    User.belongsToMany(models.Movie, {
-      through: 'UserMovie',
-      as: 'movies',
-      foreignKey: 'userId'
-    });
-  };
+
+    User.associate = function(models) {
+      User.hasMany(models.Movie, {
+        foreignKey: 'userId',
+        as: 'movies'
+      });
+     };
   
 
   return User;

@@ -27,14 +27,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Movie.associate = function(models) {
     Movie.belongsTo(models.User, {
-      foreignKey: "userId",
-      onDelete: "CASCADE"
+      foreignKey: 'userId'
     });
-    Movie.belongsToMany(models.User, {
-      through: 'UserMovie',
-      as: 'users',
-      foreignKey: 'movieId'
-    });
-  };
+   };
+    
   return Movie;
 };
