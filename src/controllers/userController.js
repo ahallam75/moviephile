@@ -59,7 +59,7 @@ module.exports = {
       res.redirect("/");
     },
 
-    show(req, res, next){
+    /*show(req, res, next){
       userQueries.getUser(req.params.id, (err, user) => {
         console.log("This is the console.log for 'user': ", user);
         if(err || user === undefined){
@@ -70,20 +70,20 @@ module.exports = {
           res.render("users/show", {...user});
         }
       });
-    }
+    } */
 
-   /* show(req, res, next){
+   show(req, res, next){
        userQueries.getUser(req.params.id, (err, result) => {
-         console.log("This is the console.log for 'result.user': ", result.user);
+         console.log("This is the console.log for 'result': ", result);
          if(err || result.user === undefined){
            
            req.flash("notice", "No user found with that ID");
            res.redirect("/");
          } else {
-           res.render("users/show", {...result.user});
+           res.render("users/show", {...result});
          }
        });
-     } */
+     } 
     
 
     
