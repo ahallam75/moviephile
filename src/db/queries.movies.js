@@ -1,6 +1,5 @@
 const Movie = require('./models').Movie;
 const User = require('./models').User;
-//const UserMovie = require('./models').UserMovie;
 
 module.exports = {
   /*list(req, res) {
