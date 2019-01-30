@@ -17,8 +17,8 @@ create(req, res, next){
       };
       
       movieQueries.addMovie(newMovie, (err, movie) => {
-        console.log("Here is the message: ", err);
-        console.log("Here is the message: ", movie);
+        console.log("Here is the err message from create in movieController: ", err);
+        console.log("Here is the movie message from create in movieController: ", movie);
           if(err){
               res.redirect(500, "/movies/new");
           } else {
@@ -29,7 +29,8 @@ create(req, res, next){
 
 show(req, res, next){
   movieQueries.getMovie(req.params.id, (err, movie) => {
-      console.log("This is the movie: ", movie);
+      console.log("This is the movie from movieController show: ", movie);
+      console.log("This is the err from movieController show: ", err);
       if(err || movie == null){
           res.redirect(404, "/");
       } else {

@@ -33,18 +33,18 @@ module.exports = {
 
   getUser(id, callback) {
     let result = {};
-    return User.findById(id)
-    /*return User.findById(id, {
+    //return User.findById(id)
+    return User.findById(id, {
       include: [{
         model: Movie,
         as: "movies"
       }]
-    }) */
+    }) 
     .then((user) => {
       if (!user) {
         callback(404);
       } else {
-        result["user"] = user;
+        //result["user"] = user;
         callback(null, result);
       }
     })

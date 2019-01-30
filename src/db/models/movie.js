@@ -17,12 +17,12 @@ module.exports = (sequelize, DataTypes) => {
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      onDelete: "CASCADE",
-      references: {
+      onDelete: "CASCADE" //,
+      /*references: {
         model: "Users",
         key: "id",
         as: "userId",
-      },
+      },*/
     }
   }, {});
   Movie.associate = function(models) {

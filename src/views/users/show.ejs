@@ -25,10 +25,30 @@
 
       <h1>Movie List</h1>
 
-      
+      <hr>
+
+      <ul class="list-group">
+        <% result.user.movies.forEach((movie) => { %>
+          <li class="list-group-item">
+           <a href="/users/<%= user.id %>/movies/<%= movie.id %>"> <%= movie.title %> </a>
+          </li>
+        <% }) %>
+      </ul>
+
+      <hr>
 
       
+        <h1><%= movie.title %></h1>
 
+          <a href="/users/<%= movie.userId %>/movies/<%= movie.id %>/edit" class="btn btn-warning">Edit</a>
+        
+          <form style="display:initial" action="/users/<%= movie.userId %>/movies/<%= movie.id %>/destroy" method="post">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+  
+        <p><%= movie.year %></p>
+
+        <p><%= movie.director %></p>
     </main>
 
     <% include ../static/partials/baseScripts.ejs %>
