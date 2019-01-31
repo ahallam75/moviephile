@@ -105,7 +105,7 @@ describe("routes : users", () => {
      it("should list the user's email", (done) => {
 
        request.get(`${base}${this.user.id}`, (err, res, body) => {
-         expect(body).toContain("user@example.com");
+         expect(body).toContain("starman@tesla.com");
          done();
        });
 

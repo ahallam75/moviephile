@@ -89,7 +89,7 @@ describe("routes : movies", () => {
     it("should render a view with the selected movie", (done) => {
       request.get(`${base}/${this.user.id}/movies/${this.movie.id}`, (err, res, body) => {
         expect(err).toBeNull();
-        expect(movie.title).toContain("Star Wars");
+        expect(this.movie.title).toContain("Star Wars");
         done();
       });
     });
@@ -99,12 +99,12 @@ describe("routes : movies", () => {
   describe("POST /users/:userId/movies/:id/destroy", () => {
 
     it("should delete the movie with the associated ID", (done) => {
-      expect(movie.id).toBe(1);
+      expect(this.movie.id).toBe(1);
       request.post(`${base}/${this.user.id}/movies/${this.movie.id}/destroy`, (err, res, body) => {
         Movie.findById(1)
         .then((movie) => {
           expect(err).toBeNull();
-          expect(movie).toBeNull();
+          expect(this.movie.id).toBeNull();
           done();
         })
       });
@@ -162,9 +162,9 @@ describe("routes : movies", () => {
             where: {id: this.movie.id}
           })
           .then((movie) => {
-            expect(title).toContain("Star Wars");
-            expect(year).toContain(1977);
-            expect(director).toContain("George Lucas");
+            expect(this.movie.title).toContain("Star Wars");
+            expect(this.movie.year).toContain(1977);
+            expect(this.movie.director).toContain("George Lucas");
             done();
           });
         });

@@ -27,9 +27,23 @@
 
       <hr>
 
-      <section class="col-lg-4">
+      <section class="row">
+
+      <section class="col-sm-2">
           <h4 class="display text-left">Title:</h4>
       </section>
+
+      <section class="col-sm-2">
+          <h4 class="display text-left">Year:</h4>
+      </section>
+
+      <section class="col-sm-2">
+          <h4 class="display text-left">Director:</h4>
+      </section>
+
+    </section>
+
+    <hr>
 
       <section class="list-group"> 
         <% user.movies.forEach((movie) => { %>
@@ -37,7 +51,6 @@
       <section class="row">
         
         <section class="col">
-            <h4 class="display text-left">Title:</h4>
             <h5><%= movie.title %></h5>   
         </section>
 
