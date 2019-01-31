@@ -43,64 +43,26 @@ module.exports = {
         })
   },
 
- /* getMovie(id, callback){
-    return Movie.findById(id)
-    .then((movie) => {
-      callback(null, movie);
-    })
-    .catch((err) => {
-      callback(err);
-    })
-  }, */
-
-  /*getMovie(id, callback) {  
-    return Movie.findById(id, {
+  getMovie(id, callback) { 
+    return Movie.findById(id) 
+    /*return Movie.findById(id, {
         include: [
           {model: User,
-          as: "users"
+          as: "user"
         }]
-    })
+    }) */
     .then((movie) => {
         callback(null, movie);
     })
     .catch((err) => {
         callback(err);
     })
-  }, */
-
-  getMovie(id, callback) {  
-    return User.findById(id, {
-        include: [
-          {model: Movie,
-          as: "movies"
-        }]
-    })
-    .then((user) => {
-        callback(null, user);
-    })
-    .catch((err) => {
-        callback(err);
-    })
   },
 
-  
-
-  deleteMovie(id, callback){
-    return Movie.destroy({
-      where: { id }
-    })
-    .then((deletedRecordsCount) => {
-      callback(null, deletedRecordsCount);
-    })
-    .catch((err) => {
-      callback(err);
-    })
-  },
-
-  /*deleteMovie(req, callback) { 
+  deleteMovie(req, callback) { 
     return Movie.findById(req.params.id) 
         .then((movie) => {
-            if(currentUser) {
+            if(movie) {
                 movie.destroy()
                     .then((res) => {
                         callback(null, movie);
@@ -112,15 +74,11 @@ module.exports = {
         .catch((err) => {
             callback(err);
         });
-  }, */
+  }, 
 
   updateMovie(req, updatedMovie, callback) { 
     return Movie.findById(req.params.id)
         .then((movie) => {
-
-            if (!movie) {
-                return callback("Movie not found");
-            }
             movie.update(updatedMovie, {
                 fields: Object.keys(updatedMovie)
               })

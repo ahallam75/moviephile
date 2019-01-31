@@ -30,16 +30,19 @@ show(req, res, next){
       if(err || movie == null){
           res.redirect(404, "/");
       } else {
-          res.render("users/show", {movie}); //The movies should display in the user's "My Movie" page.
+          res.render("users/show", {movie});
       }
   });
 },
 
 destroy(req, res, next){
   movieQueries.deleteMovie(req, (err, deletedRecordsCount) => { 
+    console.log("This is err from movieController: ", err);
+    console.log("This is deletedRecordsCount from movieController: ", deletedRecordsCount);
     if(err){ 
       res.redirect(500, `/users/${req.params.userId}/movies/${req.params.id}`) 
     } else { 
+      req.flash("notice", "The movie has been deleted");
       res.redirect(303, `/users/${req.params.userId}`) 
     } 
   }); 
@@ -47,15 +50,17 @@ destroy(req, res, next){
 
 edit(req, res, next){
     movieQueries.getMovie(req.params.id, (err, movie) => {
+      //console.log("This is the err for edit: ", err);
+      //console.log("This is the movie for edit: ", movie);
       if(err || movie == null){
-        res.redirect(404, "/");
+        res.redirect(404, "movies/edit");
       } else {
         res.render("movies/edit", {movie});
       }
     });
   },
 
-update(req, res, next) {
+/*update(req, res, next) {
   movieQueries.updateMovie(req, req.body, (err, movie) => {
       if (err || movie == null) {
           res.redirect(404, `/users/${req.params.userId}/movies/${req.params.id}/edit`);
@@ -63,8 +68,17 @@ update(req, res, next) {
           res.redirect(`/movies/${req.params.movieId}/movies/${req.params.id}`);
       }
   });
-},
+} */
 
+update(req, res, next) {
+  movieQueries.updateMovie(req, req.body, (err, movie) => {
+      if (err || movie == null) {
+          res.redirect(404, `/users/${req.params.userId}/movies/${req.params.id}/edit`);
+      } else {
+          res.redirect(`/users/${req.params.userId}/movies/${req.params.id}`);
+      }
+  });
+}
 
 
 };

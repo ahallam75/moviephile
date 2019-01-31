@@ -34,7 +34,6 @@ module.exports = {
 
   getUser(id, callback) {
     let result = {};
-    //return User.findById(id)
     return User.findById(id, {
       include: [{
         model: Movie,
@@ -53,20 +52,5 @@ module.exports = {
         callback(err);
         })
   }  
-
-    /*getUser(id, callback) {  
-    return User.findById(id, {
-        include: [
-          {model: Movie,
-          as: "movies"
-        }]
-    })
-    .then((user) => {
-        callback(null, user);
-    })
-    .catch((err) => {
-        callback(err);
-    })
-  },*/
 
 }
