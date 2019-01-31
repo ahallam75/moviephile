@@ -16,7 +16,7 @@
       <hr>
 
       <section class="col-lg-4">
-        <h1 class="card-title">Movies</h1>
+        <!-- <h1 class="card-title">Add a New Movie to your Movie List:</h1> -->
         <p class="card-text">Click on the button below to add movies to your personalized movie list.</p>
         <a href="/users/<%= user.id %>/movies/new" class="btn btn-primary">New Movie</a> 
       </section>
@@ -27,43 +27,54 @@
 
       <hr>
 
-      <section class="row text-center"></section>
+      <section class="col-lg-4">
+          <h4 class="display text-left">Title:</h4>
+      </section>
 
-      <ul class="list-group"> 
-        <% user.movies.forEach((movie) => { %>  
+      <section class="list-group"> 
+        <% user.movies.forEach((movie) => { %>
           
-        <section class="col-lg-4">
-            <h2 class="card-title">Title:</h2>
-            <h4><%= movie.title %></h4>   
-
-        <a href="/users/<%= movie.userId %>/movies/<%= movie.id %>/edit" class="btn btn-danger">Edit</a>
+      <section class="row">
         
+        <section class="col">
+            <h5><%= movie.title %></h5>   
+        </section>
+
+        <section class="col">
+        <p class="card-title"><%= movie.year %></p>
+        </section>
+        
+        <section class="col">
+        <p class="card-title"><%= movie.director %></p> 
+      </section>
+
+      <section class="col">
+          <p class="card-title">
+            <button type="submit" class="btn btn-outline-secondary">Review</button>
+          </p>  
+      </section>
+
+      <section class="col-sm-1">
+          <a href="/users/<%= movie.userId %>/movies/<%= movie.id %>/edit" class="btn btn-dark">Edit</a>
+      </section>
+
+      <section class="col-sm-1">
           <form style="display:initial" action="/users/<%= movie.userId %>/movies/<%= movie.id %>/destroy" method="post">
             <button type="submit" class="btn btn-danger">Delete</button>
           </form>
-        </section>
+      </section>
 
-        <section class="col-lg-4">
-        <p><%= movie.year %></p>
       </section>
+
+     
         
-        <section class="col-lg-4">
-        <p><%= movie.director %></p> 
-      </section>
+      
+
+    </section>
         
         <% }) %> 
-      </ul> 
-
-      </section>
-
-
-
-          <section class="col-lg-4">
-            <h4 class="card-title">Evaluate Movies</h4>
-            <p class="card-text">Review, rate, and rank all of your favorite (and not so favorite) movies.</p>
-          </section>
-      
-        
+  </section> 
+       
     </main>
 
     <% include ../static/partials/baseScripts.ejs %>
