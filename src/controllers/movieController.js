@@ -20,7 +20,9 @@ create(req, res, next){
           if(err){
               res.redirect(500, "/movies/new");
           } else {
-              res.redirect(303, `/users/${newMovie.userId}/movies/${movie.id}`);
+              //res.redirect(303, `/users/${newMovie.userId}/movies/${movie.id}`);
+              req.flash("notice", "You successfully added a new movie!");
+              res.redirect(303, `/users/${req.params.userId}`);
           }
       });
 },
@@ -43,7 +45,7 @@ destroy(req, res, next){
       res.redirect(500, `/users/${req.params.userId}/movies/${req.params.id}`) 
     } else { 
       req.flash("notice", "The movie has been deleted");
-      res.redirect(303, `/users/${req.params.userId}`) 
+      res.redirect(303, `/users/${req.params.userId}`);
     } 
   }); 
 }, 
@@ -75,7 +77,10 @@ update(req, res, next) {
       if (err || movie == null) {
           res.redirect(404, `/users/${req.params.userId}/movies/${req.params.id}/edit`);
       } else {
-          res.redirect(`/users/${req.params.userId}/movies/${req.params.id}`);
+          //res.redirect(200, `/users/${req.params.userId}/movies/${req.params.id}`);
+          //res.redirect(200, `/users/${user.id}/show`);
+          req.flash("notice", "The movie has been updated successfully");
+          res.redirect(303, `/users/${req.params.userId}`);
       }
   });
 }

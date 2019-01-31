@@ -48,7 +48,8 @@ module.exports = {
           res.redirect("/users/sign_in");
         } else {
           req.flash("notice", "You've successfully signed in!");
-          res.redirect("/");
+          //res.redirect("/");  Redirects to index (Home) page. 
+          res.redirect(303, `/users/${req.user.id}`);
         }
       })
     }, 
