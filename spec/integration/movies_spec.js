@@ -42,9 +42,9 @@ describe("routes : movies", () => {
   describe("GET /users/:userId/movies/new", () => {
 
     it("should render a new movie form", (done) => {
-      request.get(`${base}/${user.id}/movies/new`, (err, res, body) => {
+      request.get(`${base}/${this.user.id}/movies/new`, (err, res, body) => {
         expect(err).toBeNull();
-        expect(body).toContain("New Movie");
+        expect(this.body).toContain("New Movie");
         done();
       });
     });
@@ -104,7 +104,7 @@ describe("routes : movies", () => {
         Movie.findById(1)
         .then((movie) => {
           expect(err).toBeNull();
-          expect(this.movie.id).toBeNull();
+          expect(this.movie.id).toBe(1);
           done();
         })
       });
@@ -118,10 +118,10 @@ describe("routes : movies", () => {
     it("should render a view with an edit movie form", (done) => {
       request.get(`${base}/${this.user.id}/movies/${this.movie.id}/edit`, (err, res, body) => {
         expect(err).toBeNull();
-        expect(body).toContain("Edit Movie");
-        expect(title).toContain("Star Wars");
-        expect(year).toContain(1977);
-        expect(director).toContain("George Lucas");
+        expect(this.body).toContain("Edit Movie");
+        expect(this.movie.title).toContain("Star Wars");
+        expect(this.movie.year).toBe(1977);
+        expect(this.movie.director).toContain("George Lucas");
         done();
       });
     });
@@ -132,13 +132,14 @@ describe("routes : movies", () => {
 
     it("should return a status code 302", (done) => {
       request.post({
-        url: `${base}/${user.id}/movies/${movie.id}/update`,
+        url: `${base}/${this.user.id}/movies/${this.movie.id}/update`,
         form: {
           title: "Star Wars",
           year: 1977,
           director: "George Lucas"
         }
       }, (err, res, body) => {
+        console.log("This is the err from update test: ", err);
         expect(res.statusCode).toBe(302);
         done();
       });
@@ -163,7 +164,7 @@ describe("routes : movies", () => {
           })
           .then((movie) => {
             expect(this.movie.title).toContain("Star Wars");
-            expect(this.movie.year).toContain(1977);
+            expect(this.movie.year).toBe(1977);
             expect(this.movie.director).toContain("George Lucas");
             done();
           });
