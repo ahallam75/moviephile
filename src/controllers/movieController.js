@@ -39,8 +39,8 @@ show(req, res, next){
 
 destroy(req, res, next){
   movieQueries.deleteMovie(req, (err, deletedRecordsCount) => { 
-    console.log("This is err from movieController: ", err);
-    console.log("This is deletedRecordsCount from movieController: ", deletedRecordsCount);
+    //console.log("This is err from movieController: ", err);
+    //console.log("This is deletedRecordsCount from movieController: ", deletedRecordsCount);
     if(err){ 
       res.redirect(500, `/users/${req.params.userId}/movies/${req.params.id}`) 
     } else { 

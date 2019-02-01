@@ -1,6 +1,6 @@
 const request = require("request");
 const server = require("../../src/server");
-const base = "http://localhost:3000/movies/";
+const base = "http://localhost:3000/users/";
 const sequelize = require("../../src/db/models/index").sequelize;
 const Movie = require("../../src/db/models").Movie;
 const User = require("../../src/db/models").User;
@@ -42,9 +42,9 @@ describe("routes : movies", () => {
   describe("GET /users/:userId/movies/new", () => {
 
     it("should render a new movie form", (done) => {
-      request.get(`${base}/${this.user.id}/movies/new`, (err, res, body) => {
+      request.get(`${base}${this.user.id}/movies/new`, (err, res, body) => {
         expect(err).toBeNull();
-        expect(this.body).toContain("New Movie");
+        expect(body).toContain("New Movie");
         done();
       });
     });
@@ -116,9 +116,9 @@ describe("routes : movies", () => {
   describe("GET /users/:userId/movies/:id/edit", () => {
 
     it("should render a view with an edit movie form", (done) => {
-      request.get(`${base}/${this.user.id}/movies/${this.movie.id}/edit`, (err, res, body) => {
+      request.get(`${base}${this.user.id}/movies/${this.movie.id}/edit`, (err, res, body) => {
         expect(err).toBeNull();
-        expect(this.body).toContain("Edit Movie");
+        expect(body).toContain("Edit Movie");
         expect(this.movie.title).toContain("Star Wars");
         expect(this.movie.year).toBe(1977);
         expect(this.movie.director).toContain("George Lucas");
@@ -132,15 +132,14 @@ describe("routes : movies", () => {
 
     it("should return a status code 302", (done) => {
       request.post({
-        url: `${base}/${this.user.id}/movies/${this.movie.id}/update`,
+        url: `${base}${this.user.id}/movies/${this.movie.id}/update`,
         form: {
           title: "Star Wars",
           year: 1977,
           director: "George Lucas"
         }
       }, (err, res, body) => {
-        console.log("This is the err from update test: ", err);
-        expect(res.statusCode).toBe(302);
+        expect(res.statusCode).toBe(303);
         done();
       });
     });
@@ -175,47 +174,6 @@ describe("routes : movies", () => {
 
 }); //Final closing curly brace
 
-/*describe("routes : movies", () => {
-  beforeEach((done) => {
-    this.movie;
-    sequelize.sync({force: true}).then((res) => {
 
-     Movie.create({
-       title: "Star Wars",
-       year: 1977,
-       director: "George Lucas"
-     })
-      .then((movie) => {
-        this.movie = movie;
-        done();
-      })
-      .catch((err) => {
-        console.log(err);
-        done();
-      });
-
-    });
-
-  });
-
-
-  describe("GET /movies", () => {
-
-    it("should return a status code 200 and all movies", (done) => {
-      request.get(base, (err, res, body) => {
-        expect(res.statusCode).toBe(200);
-        done();
-      });
-    });
-
-    request.get(base, (err, res, body) => {
-      expect(res.statusCode).toBe(200);
-      expect(err).toBeNull();
-      expect(body).toContain("Movies");
-      expect(body).toContain("Star Wars");
-      done();
-    });
-  });
-}); */
 
   
