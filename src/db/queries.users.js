@@ -34,6 +34,7 @@ module.exports = {
 
   getUser(id, callback) {
     let result = {};
+    //return User.findById(id)
     return User.findById(id, {
       include: [{
         model: Movie,

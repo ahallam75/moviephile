@@ -44,13 +44,13 @@ module.exports = {
   },
 
   getMovie(id, callback) { 
-    return Movie.findById(id) 
-    /*return Movie.findById(id, {
+    //return Movie.findById(id) 
+    return Movie.findById(id, {
         include: [
           {model: User,
-          as: "user"
+          as: "users"
         }]
-    }) */
+    }) 
     .then((movie) => {
         callback(null, movie);
     })
