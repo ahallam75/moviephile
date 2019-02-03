@@ -46,6 +46,7 @@ module.exports = {
         callback(404);
       } else {
         result["user"] = user;
+        //console.log("This is result: ", result);
         callback(null, user);
       }
     })
