@@ -48,7 +48,7 @@ module.exports = {
     return Movie.findById(id, {
         include: [
           {model: User,
-          as: "users"
+          //as: "users"
         }]
     }) 
     .then((movie) => {

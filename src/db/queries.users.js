@@ -31,7 +31,24 @@ module.exports = {
     })
   },
 
+  getUser(id, callback) {  
+    return Movie.findById(id, {
+        include: [
+          {model: User,
+          as: "users"
+        }]
+    }) 
+    .then((movie) => {
+        console.log("This is the console.log for 'movie' from queries.users: ", movie);
+        callback(null, movie);
+    })
+    .catch((err) => {
+        console.log("This is the console.log for 'err' from queries.users: ", err);
+        callback(err);
+    })
+  },
 
+  /*
   getUser(id, callback) {
     let result = {};
     //return User.findById(id)
@@ -53,6 +70,16 @@ module.exports = {
         .catch((err) => {
         callback(err);
         })
-  }  
+  }  */
 
 }
+
+/*
+User.findByPk(id, {
+  include: [{
+      model: Movie
+  }]
+})
+.then(user => {
+// Here, you can access user.MovieRatings
+}); */

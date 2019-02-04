@@ -13,17 +13,8 @@ module.exports = (sequelize, DataTypes) => {
     director: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-    userId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      onDelete: "CASCADE" //,
-      /*references: {
-        model: "Users",
-        key: "id",
-        as: "userId",
-      },*/
     }
+    
   }, {});
   Movie.associate = function(models) {
     /*Movie.belongsTo(models.User, {
