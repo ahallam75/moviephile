@@ -32,15 +32,15 @@ module.exports = {
   },
 
   getUser(id, callback) {  
-    return Movie.findById(id, {
+    return User.findById(id, {
         include: [
-          {model: User,
-          as: "users"
+          {model: Movie,
+          as: "movies"
         }]
     }) 
-    .then((movie) => {
-        console.log("This is the console.log for 'movie' from queries.users: ", movie);
-        callback(null, movie);
+    .then((user) => {
+        console.log("This is the console.log for 'movie' from queries.users: ", user);
+        callback(null, user);
     })
     .catch((err) => {
         console.log("This is the console.log for 'err' from queries.users: ", err);

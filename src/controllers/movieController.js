@@ -8,6 +8,8 @@ new(req, res, next){
 },
 
 create(req, res, next){
+    console.log("This is the console.log for 'req' from 'create' in movieController: ", req);
+    console.log("This is the console.log for 'req.body' from 'create' in movieController: ", req.body);
 
       let newMovie = {
           title: req.body.title,
@@ -17,6 +19,8 @@ create(req, res, next){
       };
       
       movieQueries.addMovie(newMovie, (err, movie) => {
+          console.log("This is the console.log for 'err' from movieController: ", err);
+          console.log("This is the console.log for 'movie' from movieController: ", movie);
           if(err){
               res.redirect(500, "/movies/new");
           } else {

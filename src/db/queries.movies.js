@@ -34,13 +34,19 @@ module.exports = {
   },*/
 
   addMovie(newMovie, callback) {  
-    return Movie.create(newMovie)
-        .then((movie) => {
-            callback(null, movie);
-        })
-        .catch((err) => {
-             callback(err);
-        })
+    //return Movie.create(newMovie)
+    return Movie.create(newMovie, {
+      include: [
+        {model: User,
+        as: "users"
+      }]
+    }) 
+    .then((movie) => {
+      callback(null, movie);
+    })
+    .catch((err) => {
+      callback(err);
+    })
   },
 
   getMovie(id, callback) { 

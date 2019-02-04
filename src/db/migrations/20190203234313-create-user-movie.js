@@ -14,6 +14,12 @@ module.exports = {
       movieId: {
         type: Sequelize.INTEGER
       },
+      rating: {
+        type: Sequelize.INTEGER
+      },
+      review: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

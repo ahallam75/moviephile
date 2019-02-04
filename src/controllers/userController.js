@@ -62,6 +62,7 @@ module.exports = {
 
    show(req, res, next){
        userQueries.getUser(req.params.id, (err, user) => {
+         console.log("This is the console.log for 'req.params.id': ", req.params.id);
          console.log("This is the console.log for 'user': ", user);
          console.log("This is the console.log for 'err': ", err);
          if(err || user === undefined){
