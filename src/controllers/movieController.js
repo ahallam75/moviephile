@@ -8,8 +8,9 @@ new(req, res, next){
 },
 
 create(req, res, next){
-    console.log("This is the console.log for 'req' from 'create' in movieController: ", req);
-    console.log("This is the console.log for 'req.body' from 'create' in movieController: ", req.body);
+    console.log("This is the console.log for 'req.user.id' from 'create' in movieController: ", req.user.id);
+    
+
 
       let newMovie = {
           title: req.body.title,
@@ -33,7 +34,7 @@ create(req, res, next){
 
 show(req, res, next){
   movieQueries.getMovie(req.params.id, (err, movie) => {
-      console.log("Here's the movie: ", movie);
+      //console.log("Here's the movie: ", movie);
       if(err || movie == null){
           res.redirect(404, "/");
       } else {

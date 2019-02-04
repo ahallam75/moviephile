@@ -33,11 +33,12 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   },*/
 
-  addMovie(newMovie, callback) {  
+  addMovie(newMovie, callback) { 
+    console.log("This is the console.log for 'newMovie' from queries.movies: ", newMovie); 
     //return Movie.create(newMovie)
     return Movie.create(newMovie, {
       include: [
-        {model: User,
+        {model: Users,
         as: "users"
       }]
     }) 

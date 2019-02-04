@@ -39,11 +39,11 @@ module.exports = {
         }]
     }) 
     .then((user) => {
-        console.log("This is the console.log for 'movie' from queries.users: ", user);
+        //console.log("This is the console.log for 'movie' from queries.users: ", user);
         callback(null, user);
     })
     .catch((err) => {
-        console.log("This is the console.log for 'err' from queries.users: ", err);
+        //console.log("This is the console.log for 'err' from queries.users: ", err);
         callback(err);
     })
   },
