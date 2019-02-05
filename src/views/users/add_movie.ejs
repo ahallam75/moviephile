@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../static/partials/head.ejs %>
+  </head>
+  <body>
+    <% include ../static/partials/navbar.ejs %>
+
+    <main class="container">
+
+      <h1>Edit Movie</h1>
+
+      <form action="/users/<%= user.id %>/add_movie" method="post">
+        <div class="form-group">
+          <label for="id">Movie Id</label>
+          <input value="" type="text" class="form-control" name="movieId" aria-describedby="titleHelp" placeholder="Enter Title">
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+      </form>
+    </main>
+
+    <% include ../static/partials/baseScripts.ejs %>
+
+  </body>
+</html>

@@ -12,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     rating: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: true
     },
     review: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: true
     }
   }, {});
   UserMovie.associate = function(models) {

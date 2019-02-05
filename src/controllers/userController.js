@@ -37,6 +37,22 @@ module.exports = {
            });
     },
 
+    addMovie(req, res, next) {
+      //console.log(req);
+      userQueries.addMovie(req.body.movieId, req.params.id, (err, user) => {
+        //console.log("This is the console.log for 'req.params.id': ", req.params.id);
+        //console.log("This is the console.log for 'user': ", user);
+        
+        if(err || user === undefined){
+          console.log("This is the console.log for 'err': ", err);
+          req.flash("notice", "No user found with that ID");
+          res.redirect("/");
+        } else {
+          res.render("users/show", {user});
+        }
+      });
+    },
+
     signInForm(req, res, next){
       res.render("users/sign_in");
     }, 
@@ -73,7 +89,20 @@ module.exports = {
            res.render("users/show", {user});
          }
        });
-     } 
+     }, 
+
+   addMovieForm(req, res, next) {
+    userQueries.getUser(req.params.id, (err, user) => {
+      if(err || user === undefined){
+        
+        req.flash("notice", "No user found with that ID");
+        res.redirect("/");
+      } else {
+        res.render("users/add_movie", {user});
+      }
+    }); 
+    
+   }
     
 
     

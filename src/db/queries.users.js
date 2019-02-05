@@ -31,11 +31,46 @@ module.exports = {
     })
   },
 
-  getUser(id, callback) {  
+  addMovie(id, userId, callback) {
+    return User.findById(id, {
+      include: [
+        {model: Movie,
+        as: "movies", 
+        through: {attributes: ["userId", "movieId"]}
+      }]
+  }) 
+  .then((user) => {
+      //console.log("This is the console.log for 'movie' from queries.users: ", user);
+      callback(null, user);
+  })
+  .catch((err) => {
+      console.log("2 - This is the console.log for 'err' from queries.users: ", err);
+      callback(err);
+  })
+    this.getUser(userId, (user) => {
+      console.log(user);
+      return user.addMovie(id).then(() => {
+        console.log("This is the console.log for 'movie' from queries.users: ", user);
+        callback(null, user);
+    })
+    .catch((err) => {
+        console.log("1 - This is the console.log for 'err' from queries.users: ", err);
+        callback(err);
+    });
+    }).catch((err) => {
+      callback(err)
+    });
+    
+},
+
+  getUser(id, callback) {
+    console.log("id = ", id)
+ 
     return User.findById(id, {
         include: [
           {model: Movie,
-          as: "movies"
+          as: "movies", 
+          through: {attributes: ["userId", "movieId"]}
         }]
     }) 
     .then((user) => {
@@ -43,7 +78,7 @@ module.exports = {
         callback(null, user);
     })
     .catch((err) => {
-        //console.log("This is the console.log for 'err' from queries.users: ", err);
+        console.log("2 - This is the console.log for 'err' from queries.users: ", err);
         callback(err);
     })
   },

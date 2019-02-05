@@ -9,8 +9,6 @@ new(req, res, next){
 
 create(req, res, next){
     console.log("This is the console.log for 'req.user.id' from 'create' in movieController: ", req.user.id);
-    
-
 
       let newMovie = {
           title: req.body.title,
@@ -29,7 +27,7 @@ create(req, res, next){
               req.flash("notice", "You successfully added a new movie!");
               res.redirect(303, `/users/${req.params.userId}`);
           }
-      });
+      }); 
 },
 
 show(req, res, next){
