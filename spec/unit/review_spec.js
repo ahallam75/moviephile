@@ -13,7 +13,7 @@ describe("Review", () => {
     sequelize.sync({force: true}).then((res) => {
 
       User.create({
-        email: "fake@example.com",
+        email: "user@example.com",
         password: "fakepassword123"
       })
       .then((user) => {
@@ -23,19 +23,11 @@ describe("Review", () => {
           title: "Star Wars",
           year: 1977,
           director: "George Lucas",
-          reviews: [{
-            body: "Great movie.",
-            userId: this.user.id
-          }]
-        }, {
-          include: {
-            model: Review,
-            as: "reviews"
-          }
+          userId: this.user.id
         })
+        
         .then((movie) => {
-          this.movie - movie;
-          this.review = this.movie.reviews[0];
+          this.movie = movie;
 
           Review.create({
             body: "Great movie.",
@@ -46,18 +38,16 @@ describe("Review", () => {
             this.review = review;
             done();
           })
-          .catch((err) => {
-            console.log(err);
-            done();
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-          done();
-        });
+        
+      });
+      .catch((err) => {
+        console.log(err);
+        done();
       });
     });
+
   });
+});
 
   describe("#create()", () => {
 
@@ -181,4 +171,6 @@ describe("Review", () => {
     });
 
   });
-});
+
+
+
