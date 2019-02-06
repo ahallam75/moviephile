@@ -1,7 +1,6 @@
 const sequelize = require("../../src/db/models/index").sequelize;
 const User = require("../../src/db/models").User;
 const Movie = require("../../src/db/models").Movie;
-//const UserMovie = require("../../src/db/models").UserMovie;
 
 describe("Movie", () => {
 

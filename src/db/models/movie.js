@@ -27,9 +27,14 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Movie.associate = function(models) {
     Movie.belongsTo(models.User, {
-      foreignKey: 'userId'
+      foreignKey: "userId"
     });
-   };
+
+    Movie.hasOne(models.Review, {
+      foreignKey: "movieId",
+      as: "reviews"
+    });
+  };
     
   return Movie;
 };
