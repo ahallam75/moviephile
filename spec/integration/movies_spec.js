@@ -130,7 +130,7 @@ describe("routes : movies", () => {
 
   describe("POST /users/:userId/movies/:id/update", () => {
 
-    it("should return a status code 302", (done) => {
+    it("should return a status code 303", (done) => {
       request.post({
         url: `${base}${this.user.id}/movies/${this.movie.id}/update`,
         form: {
