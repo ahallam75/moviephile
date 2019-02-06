@@ -13,7 +13,7 @@ describe("Review", () => {
     sequelize.sync({force: true}).then((res) => {
 
       User.create({
-        email: "user@example.com",
+        email: "fake@example.com",
         password: "fakepassword123"
       })
       .then((user) => {
@@ -39,7 +39,7 @@ describe("Review", () => {
             done();
           })
         
-      });
+      })
       .catch((err) => {
         console.log(err);
         done();
@@ -171,6 +171,10 @@ describe("Review", () => {
     });
 
   });
+
+});
+
+
 
 
 
