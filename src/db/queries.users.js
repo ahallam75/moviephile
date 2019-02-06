@@ -1,5 +1,6 @@
 const User = require("./models").User;
 const Movie = require("./models").Movie;
+const Review = require("./models").Review;
 const bcrypt = require("bcryptjs");
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -37,7 +38,10 @@ module.exports = {
     return User.findById(id, {
       include: [{
         model: Movie,
-        as: "movies"
+        as: "movies", 
+          include: [
+            {model: Review, as: "reviews"}
+          ]
       }]
     }) 
     .then((user) => {
@@ -45,6 +49,8 @@ module.exports = {
         callback(404);
       } else {
         result["user"] = user;
+        console.log("This is the console.log for 'user': ", user);
+
         callback(null, user);
       }
     })

@@ -1,5 +1,6 @@
 const Movie = require('./models').Movie;
 const User = require('./models').User;
+const Review = require('./models').Review;
 
 module.exports = {
   /*list(req, res) {
@@ -44,13 +45,14 @@ module.exports = {
   },
 
   getMovie(id, callback) { 
-    return Movie.findById(id) 
-    /*return Movie.findById(id, {
-        include: [
-          {model: User,
-          as: "user"
-        }]
-    }) */
+    //return Movie.findById(id) 
+    return Movie.findById(id, {
+      include: [
+        {model: Review, as: "reviews", include: [
+          {model: User }
+        ]}
+      ]
+    })
     .then((movie) => {
         callback(null, movie);
     })

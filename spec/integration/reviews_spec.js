@@ -75,15 +75,15 @@ describe("signed in user performing CRUD actions for Review", () => {
       const options = {
         url: `${base}${this.user.id}/movies/${this.movie.id}/reviews/create`,
         form: {
-          body: "This movie is amazing!"
+          body: "Great movie."
         }
       };
       request.post(options,
         (err, res, body) => {
-          Review.findOne({where: {body: "This movie is amazing!"}})
+          Review.findOne({where: {body: "Great movie."}})
           .then((review) => {
             expect(review).not.toBeNull();
-            expect(review.body).toBe("This movie is amazing!");
+            expect(review.body).toBe("Great movie.");
             expect(review.id).not.toBeNull();
             done();
           })
