@@ -49,7 +49,7 @@ module.exports = {
         callback(404);
       } else {
         result["user"] = user;
-        console.log("This is the console.log for 'user': ", user);
+        //console.log("This is the console.log for 'user': ", user);
 
         callback(null, user);
       }

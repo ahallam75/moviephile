@@ -16,7 +16,6 @@
       <hr>
 
       <section class="col-lg-4">
-        <!-- <h1 class="card-title">Add a New Movie to your Movie List:</h1> -->
         <p class="card-text">Click on the button below to add movies to your personalized movie list.</p>
         <a href="/users/<%= user.id %>/movies/new" class="btn btn-primary">New Movie</a> 
       </section>
@@ -29,79 +28,58 @@
 
       <section class="row">
 
-      <section class="col-sm-2">
+        <section class="col-sm-2">
           <h4 class="display text-left">Title:</h4>
-      </section>
+        </section>
 
-      <section class="col-sm-2">
+        <section class="col-sm-2">
           <h4 class="display text-left">Year:</h4>
-      </section>
+        </section>
 
-      <section class="col-sm-2">
+        <section class="col-sm-2">
           <h4 class="display text-left">Director:</h4>
-      </section>
+        </section>
 
-    </section>
+      </section>
 
     <hr>
 
       <section class="list-group"> 
         <% user.movies.forEach((movie) => { %>
           
-      <section class="row">
+        <section class="row">
         
-        <section class="col">
+          <section class="col">
             <h5><%= movie.title %></h5>   
-        </section>
+          </section>
 
-        <section class="col">
-        <p class="card-title"><%= movie.year %></p>
-        </section>
+          <section class="col">
+            <p class="card-title"><%= movie.year %></p>
+          </section>
         
-        <section class="col">
-        <p class="card-title"><%= movie.director %></p> 
-      </section>
+          <section class="col">
+            <p class="card-title"><%= movie.director %></p> 
+          </section>
 
-      <section class="col">
-          <p class="card-title">
-            <button type="submit" class="btn btn-outline-secondary">Review</button>
-          </p>  
-      </section>
+          <section class="col">
+            <a href="/users/<%= movie.userId %>/movies/<%= movie.id %>/reviews/<%= review.id %>/show" class="btn btn-outline-secondary">Review</a> 
+          </section>
 
-      <section class="col-sm-1">
-          <a href="/users/<%= movie.userId %>/movies/<%= movie.id %>/edit" class="btn btn-dark">Edit</a>
-      </section>
+          <section class="col-sm-1">
+            <a href="/users/<%= movie.userId %>/movies/<%= movie.id %>/edit" class="btn btn-dark">Edit</a>
+          </section>
 
-      <section class="col-sm-1">
-          <form style="display:initial" action="/users/<%= movie.userId %>/movies/<%= movie.id %>/destroy" method="post">
-            <button type="submit" class="btn btn-danger">Delete</button>
-          </form>
-      </section>
+          <section class="col-sm-1">
+            <form style="display:initial" action="/users/<%= movie.userId %>/movies/<%= movie.id %>/destroy" method="post">
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </section>
+
+        </section>
 
       </section>
-
-    </section>
         
         <% }) %> 
-  </section> 
-
-      <section id="review-form">
-
-       <% if(currentUser) { %>
-         <% include ../reviews/new.ejs %>
-       <% } %>
-      </section>
-  
-      <section id="review-list">
-       <% if(movie.reviews) { %>
-         <% movie.reviews.forEach((review) => { %>
-   
-           <%- include("../reviews/show.ejs", {review}) %>
-         <% }) %>
-       <% } %>
-      </section>
-       
-    </main>
 
     <% include ../static/partials/baseScripts.ejs %>
 

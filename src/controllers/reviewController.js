@@ -21,6 +21,16 @@ module.exports = {
       });
   },
 
+  show(req, res, next){
+    movieQueries.getReview(req.params.id, (err, review) => {
+        if(err || review == null){
+            res.redirect(404, "/");
+        } else {
+            res.render("reviews/show", {review});
+        }
+    });
+  },
+
   destroy(req, res, next){
     reviewQueries.deleteReview(req, (err, review) => {
       if(err){
