@@ -1,4 +1,5 @@
 const reviewQueries = require("../db/queries.reviews.js");
+const userQueries = require("../db/queries.users.js");
 
 module.exports = {
 
@@ -22,7 +23,7 @@ module.exports = {
   },
 
   show(req, res, next){
-    movieQueries.getReview(req.params.id, (err, review) => {
+    reviewQueries.getReview(req.params.id, (err, review) => {
         if(err || review == null){
             res.redirect(404, "/");
         } else {

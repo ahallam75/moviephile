@@ -19,7 +19,7 @@ module.exports = {
     return Review.findById(id, {
       include: [
         {model: Movie, as: "movies", include: [
-          {model: User, as: "users" }
+          {model: User}
         ]}
       ]
     })
