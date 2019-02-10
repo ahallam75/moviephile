@@ -1,6 +1,4 @@
 const Review = require("./models").Review;
-const Movie = require("./models").Movie;
-const User = require("./models").User;
 
 module.exports = {
 
@@ -13,7 +11,7 @@ module.exports = {
       callback(err);
     });
   },
-
+ /*
   getReview(id, callback) { 
     //return Review.findById(id) 
     return Review.findById(id, {
@@ -29,7 +27,7 @@ module.exports = {
     .catch((err) => {
         callback(err);
     })
-  },
+  }, */
 
   deleteReview(req, callback){
     return Review.findById(req.params.id)

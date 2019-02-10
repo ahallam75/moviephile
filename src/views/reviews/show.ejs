@@ -1,55 +1,20 @@
-<!DOCTYPE html>
-  <html>
-    <head>
-      <% include ../static/partials/head.ejs %>
-    </head>
-    <body>
-  
-      <% include ../static/partials/navbar.ejs %>
-  
-      <main class="container">
-  
-        <% include ../static/partials/messages.ejs %>
-  
-        <h1><%= `${user.email}'s ${movie.title} Review!` %></h1>
-  
-        <hr>
+<% if(review) { %>
+  <div style="width: 50%">
+    <hr>
+    <p>
+      <%= review.body %>
+    </p>
+    <small class="card-subtitle mb-2 text-muted">
+      created on <%= review.createdAt %>
+    </small>
 
-          <section id="comment-form">
-              <% include ../reviews/new.ejs %>
-          </section>
-            
-          <section class="row">
-          
-            <% if(review) { %>
-              <div style="width: 50%">
-                <hr>
-                <p>
-                  <%= review.body %>
-                </p>
-                <small class="card-subtitle mb-2 text-muted"> 
-                  created by <%= review.User.email %> on <%= review.createdAt %>
-                </small>
-           
-                <% if(currentUser) { %>
-                  <section class="col-sm-1">
-                    <a href="/users/<%= movie.userId %>/movies/<%= movie.id %>/reviews/<%= review.id %>/edit" class="btn btn-dark">Edit</a>
-                  </section>
-                  <form style="display:initial"
-                        action="/users/<%= movie.userId %>/movies/<%= movie.id %>/reviews/<%= review.id %>/destroy"
-                        method="post">
-                    <button type="submit" class="btn btn btn-sm btn-outline-danger">Delete</button>
-                  </form>
-                <% } %>
-                <hr>
-              </div>
-            <% } %>
-  
-          </section>
-  
-      <% include ../static/partials/baseScripts.ejs %>
-  
-    </body>
-  </html>
-  
-  
+    <% if(currentUser && currentUser.id === review.userId) { %>
+      <form style="display:initial"
+            action="/users/<%= movie.userId %>/movies/<%= movie.id %>/reviews/<%= review.id %>/destroy"
+            method="post">
+        <button type="submit" class="btn btn btn-sm btn-outline-danger">Delete</button>
+      </form>
+    <% } %>
+    <hr>
+  </div>
+<% } %>

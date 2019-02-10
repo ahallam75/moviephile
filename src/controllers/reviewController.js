@@ -1,5 +1,4 @@
 const reviewQueries = require("../db/queries.reviews.js");
-const userQueries = require("../db/queries.users.js");
 
 module.exports = {
 
@@ -22,6 +21,7 @@ module.exports = {
       });
   },
 
+  /*
   show(req, res, next){
     reviewQueries.getReview(req.params.id, (err, review) => {
         if(err || review == null){
@@ -30,7 +30,7 @@ module.exports = {
             res.render("reviews/show", {review});
         }
     });
-  },
+  }, */
 
   destroy(req, res, next){
     reviewQueries.deleteReview(req, (err, review) => {
