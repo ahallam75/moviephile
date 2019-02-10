@@ -42,6 +42,7 @@ showTwo(req, res, next){
         if(err || movie == null){
             res.redirect(404, "/");
         } else {
+            //console.dir("This is the log for movie.reviews: ", movie.reviews);
             res.render("movies/show", {movie});
         }
     });

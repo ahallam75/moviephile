@@ -59,12 +59,9 @@ module.exports = {
     })
 
    .then((user) => {
-     console.log("This is the user: ", user);
      callback(null, user);
    })
    .catch((err) => {
-    console.log("This is the err: ", err);
-
      callback(err);
    })
  },

@@ -12,16 +12,18 @@
       <p><%= movie.year %></p>
 
       <p><%= movie.director %></p>
+
+      <section id="review-form">
+        <% if(currentUser) { %>
+          <% include ../reviews/new.ejs %>
+        <% } %>
+      </section>
        
-          <section id="review-list">
-           <% if(movie.reviews) { %>
-             <% movie.reviews.forEach((review) => { %>
-
-               <%- include("../reviews/show.ejs", {review}) %>
-
-             <% }) %>
-           <% } %>
-          </section>
+      <section id="comment-list">
+        <% if(movie.reviews) { %>
+          <%- include("../reviews/show.ejs", {movie.reviews}) %>
+        <% } %>
+      </section>
 
     </main>
 
