@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../static/partials/head.ejs %>
+  </head>
+  <body>
+    <% include ../static/partials/navbar.ejs %>
+
+    <main class="container">
+      <h1><%= movie.title %></h1>
+
+      <p><%= movie.year %></p>
+
+      <p><%= movie.director %></p>
+       
+          <section id="review-list">
+           <% if(movie.reviews) { %>
+             <% movie.reviews.forEach((review) => { %>
+
+               <%- include("../reviews/show.ejs", {review}) %>
+
+             <% }) %>
+           <% } %>
+          </section>
+
+    </main>
+
+    <% include ../static/partials/baseScripts.ejs %>
+
+  </body>
+</html>

@@ -37,6 +37,16 @@ show(req, res, next){
   });
 },
 
+showTwo(req, res, next){
+    movieQueries.getMovie(req.params.id, (err, movie) => {
+        if(err || movie == null){
+            res.redirect(404, "/");
+        } else {
+            res.render("movies/show", {movie});
+        }
+    });
+  },
+
 destroy(req, res, next){
   movieQueries.deleteMovie(req, (err, deletedRecordsCount) => { 
     //console.log("This is err from movieController: ", err);

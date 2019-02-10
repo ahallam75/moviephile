@@ -48,16 +48,34 @@ module.exports = {
         callback(err);
     })
   },
+
+  getUser(id, callback){
+    return User.findById(id, {
+
+      include: [{
+        model: Movie,
+        as: "movies"
+      }]
+    })
+
+   .then((user) => {
+     console.log("This is the user: ", user);
+     callback(null, user);
+   })
+   .catch((err) => {
+    console.log("This is the err: ", err);
+
+     callback(err);
+   })
+ },
   
+ /*
   getUser(id, callback) {
     let result = {};
     return User.findById(id, {
       include: [{
         model: Movie,
         as: "movies", 
-          include: [
-            {model: Review, as: "reviews"}
-          ]
       }]
     }) 
     .then((user) => {
@@ -73,6 +91,6 @@ module.exports = {
         .catch((err) => {
         callback(err);
         })
-  }  
+  }  */
 
 }
