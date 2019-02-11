@@ -13,7 +13,7 @@
       <form action="/users/<%= review.Movie.userId %>/movies/<%= review.Movie.id %>/reviews/<%= review.id %>/update" method="post">
         <div class="form-group">
           <label for="review">Review Body</label>
-          <input value="<%= review.Movie.body %>" type="text" class="form-control" name="body" aria-describedby="bodyHelp" placeholder="Enter Body">
+          <input value="<%= review.body %>" type="text" class="form-control" name="body" aria-describedby="bodyHelp" placeholder="Enter Body">
         </div>
         <button type="submit" class="btn btn-outline-success">Update</button>
       </form>
