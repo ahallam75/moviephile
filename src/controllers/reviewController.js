@@ -36,8 +36,8 @@ module.exports = {
 
 edit(req, res, next){
     reviewQueries.getReview(req.params.id, (err, review) => {
-      console.log("This is the err for edit from reviewController: ", err);
-      console.log("This is the review for edit: ", review);
+      //console.log("This is the err in edit from reviewController: ", err);
+      //console.log("This is the review.Movie from edit in reviewController: ", review.Movie);
       if(err || review == null){
         res.redirect(404, "reviews/edit");
       } else {
@@ -48,6 +48,7 @@ edit(req, res, next){
 
 update(req, res, next) {
   reviewQueries.updateReview(req, req.body, (err, review) => {
+    console.log("This is review from the update function in reviewController: ", review)
       if (err || review == null) {
           res.redirect(404, `/users/${req.params.userId}/movies/${req.params.id}/reviews/${req.params.id}/edit`);
       } else {
