@@ -54,6 +54,8 @@ module.exports = {
       ]
     })
     .then((movie) => {
+      console.log("This is the movie from getMovie in queries.movies: ", movie)
+
         callback(null, movie);
     })
     .catch((err) => {

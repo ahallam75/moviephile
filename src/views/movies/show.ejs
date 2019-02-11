@@ -14,16 +14,18 @@
       <p><%= movie.director %></p>
 
       <section id="review-form">
-        <% if(currentUser) { %>
+        <% if(currentUser && !movie.reviews) { %>
           <% include ../reviews/new.ejs %>
         <% } %>
       </section>
-       
-      <section id="comment-list">
+
+      <section id="review-list">
         <% if(movie.reviews) { %>
-          <%- include("../reviews/show.ejs", {movie.reviews}) %>
+          <%- include("../reviews/show.ejs", {movie}) %>
         <% } %>
       </section>
+       
+      
 
     </main>
 

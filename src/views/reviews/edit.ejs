@@ -1,0 +1,8 @@
+<h1>Edit Review</h1>
+
+      <form action="/users/<%= movie.userId %>/movies/<%= movie.id %>/reviews/<%= movie.reviews.id %>/edit" method="post">
+        <div class="form-group">
+          <label for="title">Review Body</label>
+          <input value="<%= movie.reviews.body %>" type="text" class="form-control" name="title" aria-describedby="titleHelp" placeholder="Enter Body">
+        </div>
+      </form>
