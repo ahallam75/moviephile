@@ -74,7 +74,7 @@ module.exports = {
       ]
     })
     .then((review) => {
-      //console.log("This is the review from getReview in queries.reviews: ", review)
+      console.log("This is the review from getReview in queries.reviews: ", review)
 
         callback(null, review);
     })

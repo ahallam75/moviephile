@@ -35,13 +35,13 @@ module.exports = {
   }, */
 
 edit(req, res, next){
-    reviewQueries.getReview(req.params.id, (err, movie) => {
-      console.log("This is the err for edit: ", err);
-      console.log("This is the movie for edit: ", movie);
-      if(err || movie == null){
+    reviewQueries.getReview(req.params.id, (err, review) => {
+      console.log("This is the err for edit from reviewController: ", err);
+      console.log("This is the review for edit: ", review);
+      if(err || review == null){
         res.redirect(404, "reviews/edit");
       } else {
-        res.render("reviews/edit", {movie});
+        res.render("reviews/edit", {review});
       }
     });
 }, 
