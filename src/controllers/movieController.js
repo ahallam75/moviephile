@@ -42,7 +42,6 @@ showTwo(req, res, next){
         if(err || movie == null){
             res.redirect(404, "/");
         } else {
-            //console.dir("This is the log for movie.reviews: ", movie.reviews);
             res.render("movies/show", {movie});
         }
     });
@@ -71,7 +70,7 @@ edit(req, res, next){
         res.render("movies/edit", {movie});
       }
     });
-  },
+},
 
 /*update(req, res, next) {
   movieQueries.updateMovie(req, req.body, (err, movie) => {
