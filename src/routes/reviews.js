@@ -10,7 +10,7 @@ router.post("/users/:userId/movies/:movieId/reviews/create",
 
 router.get("/users/:userId/movies/:movieId/reviews/:id/edit", reviewController.edit);
 
-router.post("/users/:userId/movies/:movieId/reviews/:id/edit", validation.validateReviews, reviewController.update);
+router.post("/users/:userId/movies/:movieId/reviews/:id/update", validation.validateReviews, reviewController.update);
 
 router.post("/users/:userId/movies/:movieId/reviews/:id/destroy", reviewController.destroy);
 

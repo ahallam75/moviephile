@@ -50,12 +50,11 @@ update(req, res, next) {
   reviewQueries.updateReview(req, req.body, (err, review) => {
     console.log("This is review from the update function in reviewController: ", review)
       if (err || review == null) {
+        console.log("This is err from the update function in reviewController: ", err)
           res.redirect(404, `/users/${req.params.userId}/movies/${req.params.id}/reviews/${req.params.id}/edit`);
       } else {
-          //res.redirect(200, `/users/${req.params.userId}/movies/${req.params.id}`);
-          //res.redirect(200, `/users/${user.id}/show`);
           req.flash("notice", "The review has been updated successfully");
-          res.redirect(303, `/users/${req.params.userId}/movies/${req.params.movieId}/reviews/${req.params.id}`);
+          res.redirect(303, `/users/${req.params.userId}/movies/${req.params.movieId}/show`);
       }
   });
 },
