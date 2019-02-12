@@ -13,34 +13,6 @@ module.exports = {
       callback(err);
     });
   },
- /*
-  getReview(id, callback) { 
-    //return Review.findById(id) 
-    return Review.findById(id, {
-      include: [
-        {model: Movie, as: "movies", include: [
-          {model: User}
-        ]}
-      ]
-    })
-    .then((review) => {
-        callback(null, review);
-    })
-    .catch((err) => {
-        callback(err);
-    })
-  }, */
-/*
-  deleteReview(req, callback){
-    return Review.findById(req.params.id)
-    .then((review) => {
-      review.destroy();
-      callback(null, review)
-    .catch((err) => {
-      callback(err);
-      });
-    })
-  }, */
 
   deleteReview(req, callback){
     return Review.findById(req.params.id)
@@ -55,31 +27,7 @@ module.exports = {
     })
   },
 
-
-  /*
   getReview(id, callback) { 
-    //return Movie.findById(id) 
-    return Movie.findById(id, {
-      include: [
-        {model: Review, as: "reviews", include: [
-          {model: User }
-        ]}
-      ]
-    })
-    .then((movie) => {
-      console.log("This is the movie from getMovie in queries.movies: ", movie)
-
-        callback(null, movie);
-    })
-    .catch((err) => {
-        callback(err);
-    })
-  },
-  
-  */
-
-  getReview(id, callback) { 
-    //return Review.findById(id) 
     return Review.findById(id, {
       include: [
         {model: Movie, include: [
@@ -88,8 +36,6 @@ module.exports = {
       ]
     })
     .then((review) => {
-      //console.log("This is the review from getReview in queries.reviews: ", review)
-
         callback(null, review);
     })
     .catch((err) => {
@@ -100,7 +46,6 @@ module.exports = {
   updateReview(req, updatedReview, callback) { 
     return Review.findById(req.params.id)
         .then((review) => {
-          //console.log("This is the review from updateReview in queries.reviews: ", review)
             review.update(updatedReview, {
                 fields: Object.keys(updatedReview)
               })

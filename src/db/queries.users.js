@@ -33,7 +33,6 @@ module.exports = {
   },
 
   getReview(id, callback) { 
-    //return Review.findById(id) 
     return Review.findById(id, {
       include: [
         {model: Movie, as: "movies", include: [
@@ -65,29 +64,5 @@ module.exports = {
      callback(err);
    })
  },
-  
- /*
-  getUser(id, callback) {
-    let result = {};
-    return User.findById(id, {
-      include: [{
-        model: Movie,
-        as: "movies", 
-      }]
-    }) 
-    .then((user) => {
-      if (!user) {
-        callback(404);
-      } else {
-        result["user"] = user;
-        //console.log("This is the console.log for 'user': ", user);
-
-        callback(null, user);
-      }
-    })
-        .catch((err) => {
-        callback(err);
-        })
-  }  */
 
 }

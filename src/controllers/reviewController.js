@@ -23,21 +23,8 @@ module.exports = {
       });
   },
 
-  /*
-  show(req, res, next){
-    reviewQueries.getReview(req.params.id, (err, review) => {
-        if(err || review == null){
-            res.redirect(404, "/");
-        } else {
-            res.render("reviews/show", {review});
-        }
-    });
-  }, */
-
 edit(req, res, next){
     reviewQueries.getReview(req.params.id, (err, review) => {
-      //console.log("This is the err in edit from reviewController: ", err);
-      //console.log("This is the review.Movie from edit in reviewController: ", review.Movie);
       if(err || review == null){
         res.redirect(404, "reviews/edit");
       } else {
@@ -48,9 +35,7 @@ edit(req, res, next){
 
 update(req, res, next) {
   reviewQueries.updateReview(req, req.body, (err, review) => {
-    //console.log("This is review from the update function in reviewController: ", review)
       if (err || review == null) {
-        //console.log("This is err from the update function in reviewController: ", err)
           res.redirect(404, `/users/${req.params.userId}/movies/${req.params.id}/reviews/${req.params.id}/edit`);
       } else {
           req.flash("notice", "The review has been updated successfully");
