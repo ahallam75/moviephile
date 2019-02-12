@@ -48,9 +48,9 @@ edit(req, res, next){
 
 update(req, res, next) {
   reviewQueries.updateReview(req, req.body, (err, review) => {
-    console.log("This is review from the update function in reviewController: ", review)
+    //console.log("This is review from the update function in reviewController: ", review)
       if (err || review == null) {
-        console.log("This is err from the update function in reviewController: ", err)
+        //console.log("This is err from the update function in reviewController: ", err)
           res.redirect(404, `/users/${req.params.userId}/movies/${req.params.id}/reviews/${req.params.id}/edit`);
       } else {
           req.flash("notice", "The review has been updated successfully");

@@ -86,7 +86,7 @@ module.exports = {
   updateReview(req, updatedReview, callback) { 
     return Review.findById(req.params.id)
         .then((review) => {
-          console.log("This is the review from updateReview in queries.reviews: ", review)
+          //console.log("This is the review from updateReview in queries.reviews: ", review)
             review.update(updatedReview, {
                 fields: Object.keys(updatedReview)
               })

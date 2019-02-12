@@ -106,7 +106,7 @@ describe("signed in user performing CRUD actions for Review", () => {
         expect(reviewCountBeforeDelete).toBe(1);
 
         request.post(
-         `${base}${this.user.id}/movies/${this.movie.id}/reviews/${this.review.id}/destroy`,
+         `${base}${this.movie.id}/movies/${this.movie.id}/reviews/${this.review.id}/destroy`,
           (err, res, body) => {
           expect(res.statusCode).toBe(302);
           Review.all()
@@ -123,6 +123,59 @@ describe("signed in user performing CRUD actions for Review", () => {
 
   });
 
-}); //end context for signed in user
+}); 
 
-}); //Final curly brace, etc.
+  //Edit and Update
+
+  describe("GET /users/:userId/movies/:id/reviews/:id/edit", () => {
+
+    it("should render a view with an edit review form", (done) => {
+      request.get(`${base}${this.user.id}/movies/${this.movie.id}/reviews/${this.review.id}/edit`, (err, res, body) => {
+        //Here's the path: http://localhost:3000/users/1/movies/1/reviews/13/edit
+        expect(err).toBeNull();
+        expect(body).toContain("This is a good movie.");
+        done();
+      });
+    });
+
+  });
+
+  describe("POST /users/:userId/movies/:id/reviews/:id/update", () => {
+
+    it("should return a status code 303", (done) => {
+      request.post({
+        url: `${base}${this.user.id}/movies/${this.movie.id}/reviews/${this.review.id}/update`,
+        form: {
+          body: "This is a good movie."
+        }
+      }, (err, res, body) => {
+        expect(res.statusCode).toBe(303);
+        done();
+      });
+    });
+
+    it("should update the review with the given value", (done) => {
+        const options = {
+          url: `${base}/${this.user.id}/movies/${this.movie.id}/reviews/${this.review.id}update`,
+          form: {
+            body: "This is a good movie."
+          }
+        };
+        request.post(options,
+          (err, res, body) => {
+
+          expect(err).toBeNull();
+
+          Review.findOne({
+            where: {id: this.review.id}
+          })
+          .then((review) => {
+            expect(this.review.body).toContain("Great movie.");
+            done();
+          });
+        });
+    });
+
+  });
+
+}); //end context for signed in user

@@ -104,7 +104,7 @@ describe("routes : movies", () => {
         Movie.findById(1)
         .then((movie) => {
           expect(err).toBeNull();
-          expect(this.movie.id).toBe(1);
+          expect(this.movie.id).toBeNull();
           done();
         })
       });
