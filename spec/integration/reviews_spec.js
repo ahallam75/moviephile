@@ -131,6 +131,11 @@ describe("signed in user performing CRUD actions for Review", () => {
 
     it("should render a view with an edit review form", (done) => {
       request.get(`${base}${this.user.id}/movies/${this.movie.id}/reviews/${this.review.id}/edit`, (err, res, body) => {
+        console.log("This is this.user.id: ", this.user.id)
+        console.log("This is this.movie.id: ", this.movie.id)
+
+        console.log("This is this.review.id: ", this.review.id)
+
         //Here's the path: http://localhost:3000/users/1/movies/1/reviews/13/edit
         expect(err).toBeNull();
         expect(body).toContain("This is a good movie.");

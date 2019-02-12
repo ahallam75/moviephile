@@ -30,7 +30,7 @@ module.exports = {
         callback(err);
     })
   }, */
-
+/*
   deleteReview(req, callback){
     return Review.findById(req.params.id)
     .then((review) => {
@@ -40,7 +40,21 @@ module.exports = {
       callback(err);
       });
     })
+  }, */
+
+  deleteReview(req, callback){
+    return Review.findById(req.params.id)
+    .then((review) => {
+      if(review){
+        review.destroy();
+        callback(null, review)
+      } else {
+        req.flash("notice", "Delete Failed")
+        callback(404)
+      }
+    })
   },
+
 
   /*
   getReview(id, callback) { 

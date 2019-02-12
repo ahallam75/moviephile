@@ -100,11 +100,11 @@ describe("routes : movies", () => {
 
     it("should delete the movie with the associated ID", (done) => {
       expect(this.movie.id).toBe(1);
-      request.post(`${base}/${this.user.id}/movies/${this.movie.id}/destroy`, (err, res, body) => {
+      request.post(`${base}${this.user.id}/movies/${this.movie.id}/destroy`, (err, res, body) => {
         Movie.findById(1)
         .then((movie) => {
           expect(err).toBeNull();
-          expect(this.movie.id).toBeNull();
+          expect(movie).toBeNull();
           done();
         })
       });

@@ -8,7 +8,7 @@
 
     <main class="container">
 
-<h1>Edit Review</h1>
+      <h1>Edit Review</h1>
 
       <form action="/users/<%= review.Movie.userId %>/movies/<%= review.Movie.id %>/reviews/<%= review.id %>/update" method="post">
         <div class="form-group">
@@ -17,6 +17,12 @@
         </div>
         <button type="submit" class="btn btn-outline-success">Update</button>
       </form>
+
+    <hr>
+
+      <section>
+        <a href="/users/<%= review.userId %>/movies/<%= review.movieId %>/show" class="btn btn btn-sm btn-dark">Back</a>
+      </section>
 
     </main>
 
