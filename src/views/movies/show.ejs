@@ -9,10 +9,6 @@
     <main class="container">
       <h1><%= movie.title %></h1>
 
-      <p><%= movie.year %></p>
-
-      <p><%= movie.director %></p>
-
       <section id="review-form">
         <% if(currentUser && !movie.reviews) { %>
           <% include ../reviews/new.ejs %>
@@ -24,6 +20,8 @@
           <%- include("../reviews/show.ejs", {movie}) %>
         <% } %>
       </section>
+
+      <hr>
        
       <section>
           <a href="/users/<%= movie.userId %>" class="btn btn btn-sm btn-dark">Back</a>

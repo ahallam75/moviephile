@@ -1,9 +1,10 @@
 <% if(movie.reviews) { %>
   <div style="width: 50%">
     <hr>
-    <p>
-      <%= movie.reviews.body %>
-    </p>
+    
+    <p><%= movie.reviews.body %></p>
+    <p><%= movie.reviews.rating %></p>
+
     <small class="card-subtitle mb-2 text-muted">
       created on <%= movie.reviews.createdAt %>
     </small>

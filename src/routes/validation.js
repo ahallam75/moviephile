@@ -40,7 +40,8 @@ module.exports = {
 
     validateReviews(req, res, next) {
       if(req.method === "POST") {
-        req.checkBody("body", "must not be empty"). notEmpty();
+        req.checkBody("body", "must not be empty").notEmpty();
+        req.checkBody("rating", "must not be empty").notEmpty().isInt();
       }
  
       const errors = req.validationErrors();

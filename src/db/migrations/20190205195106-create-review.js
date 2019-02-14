@@ -12,6 +12,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      rating: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
       movieId: {
         type: Sequelize.INTEGER,
         onDelete: "CASCADE",

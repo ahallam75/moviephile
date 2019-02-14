@@ -1,5 +1,4 @@
 const reviewQueries = require("../db/queries.reviews.js");
-const movieQueries = require("../db/queries.movies.js");
 
 
 module.exports = {
@@ -8,16 +7,21 @@ module.exports = {
  
       let newReview = {
         body: req.body.body,
+        review: req.body.rating,
         userId: req.user.id,
         movieId: req.params.movieId
       };
 
       reviewQueries.createReview(newReview, (err, review) => {
+        console.log("This is 'newReview' from reviewController: ", newReview)
 
         if(err){
+          console.log("This is 'err' from reviewController: ", err)
+
           req.flash("error", err);
           res.redirect(req.headers.referer);
         } else {
+          req.flash("notice", "You have added a review!");
           res.redirect(req.headers.referer);
         }
       });
@@ -49,6 +53,7 @@ destroy(req, res, next){
       if(err){
         res.redirect(err, req.headers.referer);
       } else {
+        req.flash("notice", "The review has been deleted successfully");
         res.redirect(req.headers.referer);
       }
     });
