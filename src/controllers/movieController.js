@@ -18,6 +18,7 @@ create(req, res, next){
       
       movieQueries.addMovie(newMovie, (err, movie) => {
           if(err){
+              req.flash("error", err);
               res.redirect(500, "/movies/new");
           } else {
               req.flash("notice", "You successfully added a new movie!");
@@ -70,6 +71,7 @@ edit(req, res, next){
 update(req, res, next) {
   movieQueries.updateMovie(req, req.body, (err, movie) => {
       if (err || movie == null) {
+          req.flash("error", err);
           res.redirect(404, `/users/${req.params.userId}/movies/${req.params.id}/edit`);
       } else {
           req.flash("notice", "The movie has been updated successfully");

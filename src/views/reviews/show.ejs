@@ -2,8 +2,17 @@
   <div style="width: 50%">
     <hr>
     
+    <h4>Review:</h4>
+
     <p><%= movie.reviews.body %></p>
+
+    <hr>
+
+    <h4>Rating:</h4>
+
     <p><%= movie.reviews.rating %></p>
+
+    <hr>
 
     <small class="card-subtitle mb-2 text-muted">
       created on <%= movie.reviews.createdAt %>
@@ -19,7 +28,7 @@
       </form>
       
     <% } %>
-    <hr>
+  
   </div>
 <% } %>
 

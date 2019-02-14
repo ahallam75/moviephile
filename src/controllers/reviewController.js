@@ -1,22 +1,21 @@
 const reviewQueries = require("../db/queries.reviews.js");
 
-
 module.exports = {
 
   create(req, res, next){
  
       let newReview = {
         body: req.body.body,
-        review: req.body.rating,
+        rating: req.body.rating,
         userId: req.user.id,
         movieId: req.params.movieId
       };
 
       reviewQueries.createReview(newReview, (err, review) => {
-        console.log("This is 'newReview' from reviewController: ", newReview)
+        //console.log("This is 'newReview' from reviewController: ", newReview)
 
         if(err){
-          console.log("This is 'err' from reviewController: ", err)
+          //console.log("This is 'err' from reviewController: ", err)
 
           req.flash("error", err);
           res.redirect(req.headers.referer);
@@ -40,6 +39,7 @@ edit(req, res, next){
 update(req, res, next) {
   reviewQueries.updateReview(req, req.body, (err, review) => {
       if (err || review == null) {
+          req.flash("error", err);
           res.redirect(404, `/users/${req.params.userId}/movies/${req.params.id}/reviews/${req.params.id}/edit`);
       } else {
           req.flash("notice", "The review has been updated successfully");
@@ -51,6 +51,7 @@ update(req, res, next) {
 destroy(req, res, next){
     reviewQueries.deleteReview(req, (err, review) => {
       if(err){
+        req.flash("error", err);
         res.redirect(err, req.headers.referer);
       } else {
         req.flash("notice", "The review has been deleted successfully");
