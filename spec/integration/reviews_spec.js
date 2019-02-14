@@ -35,6 +35,7 @@ describe("Review", () => {
 
           Review.create({
             body: "Great movie.",
+            rating: 100,
             userId: this.user.id,
             movieId: this.movie.id
           })
@@ -75,7 +76,8 @@ describe("signed in user performing CRUD actions for Review", () => {
       const options = {
         url: `${base}${this.user.id}/movies/${this.movie.id}/reviews/create`,
         form: {
-          body: "Great movie."
+          body: "Great movie.",
+          rating: 100
         }
       };
       request.post(options,
@@ -84,6 +86,7 @@ describe("signed in user performing CRUD actions for Review", () => {
           .then((review) => {
             expect(review).not.toBeNull();
             expect(review.body).toBe("Great movie.");
+            expect(review.rating).toBe(100);
             expect(review.id).not.toBeNull();
             done();
           })
@@ -133,6 +136,7 @@ describe("signed in user performing CRUD actions for Review", () => {
       request.get(`${base}${this.user.id}/movies/${this.movie.id}/reviews/${this.review.id}/edit`, (err, res, body) => {
         expect(err).toBeNull();
         expect(this.review.body).toContain("Great movie.");
+        expect(this.review.rating).toBe(100);
         done();
       });
     });
@@ -145,7 +149,8 @@ describe("signed in user performing CRUD actions for Review", () => {
       request.post({
         url: `${base}${this.user.id}/movies/${this.movie.id}/reviews/${this.review.id}/update`,
         form: {
-          body: "This is a good movie."
+          body: "This is a good movie.",
+          rating: 95
         }
       }, (err, res, body) => {
         expect(res.statusCode).toBe(303);
@@ -153,11 +158,12 @@ describe("signed in user performing CRUD actions for Review", () => {
       });
     });
 
-    it("should update the review with the given value", (done) => {
+    it("should update the review with the given values", (done) => {
         const options = {
           url: `${base}/${this.user.id}/movies/${this.movie.id}/reviews/${this.review.id}update`,
           form: {
-            body: "This is a good movie."
+            body: "This is a good movie.",
+            rating: 95
           }
         };
         request.post(options,
@@ -169,7 +175,8 @@ describe("signed in user performing CRUD actions for Review", () => {
             where: {id: this.review.id}
           })
           .then((review) => {
-            expect(this.review.body).toContain("Great movie.");
+            expect(review.body).toContain("Great movie.");
+            expect(review.rating).toBe(100);
             done();
           });
         });

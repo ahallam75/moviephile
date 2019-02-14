@@ -31,6 +31,7 @@ describe("Review", () => {
 
           Review.create({
             body: "Great movie.",
+            rating: 100,
             userId: this.user.id,
             movieId: this.movie.id
           })
@@ -51,14 +52,16 @@ describe("Review", () => {
 
   describe("#create()", () => {
 
-    it("should create a review object with a body, assigned movie and user", (done) => {
+    it("should create a review object with a body, rating, assigned movie, and user", (done) => {
       Review.create({                
         body: "The best movie ever!",
+        rating: 100,
         movieId: this.movie.id,
         userId: this.user.id
       })
       .then((review) => {           
         expect(review.body).toBe("The best movie ever!");
+        expect(review.rating).toBe(100);
         expect(review.movieId).toBe(this.movie.id);
         expect(review.userId).toBe(this.user.id)
         done();
@@ -70,7 +73,7 @@ describe("Review", () => {
       });
     });
 
-    it("should not create a review with missing body, assigned movie or user", (done) => {
+    it("should not create a review with missing body, rating, assigned movie, or user", (done) => {
       Review.create({
         body: "Still a great movie after all these years!"
       })
