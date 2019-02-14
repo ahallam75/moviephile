@@ -53,7 +53,9 @@ module.exports = {
 
       include: [{
         model: Movie,
-        as: "movies"
+        as: "movies", include: [
+          {model: Review, as: "reviews"}
+        ]
       }]
     })
 
@@ -63,6 +65,6 @@ module.exports = {
    .catch((err) => {
      callback(err);
    })
- },
-
+ }
+ 
 }

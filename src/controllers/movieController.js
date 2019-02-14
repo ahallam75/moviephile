@@ -28,11 +28,15 @@ create(req, res, next){
 },
 
 show(req, res, next){
+    let sortedMovies = null;
   movieQueries.getMovie(req.params.id, (err, movie) => {
       if(err || movie == null){
           res.redirect(404, "/");
       } else {
-          res.render("users/show", {movie});
+        sortedMovies = movie.sort( (a, b) => {
+            a.reviews.rating - b.reviews.rating;
+          });
+          res.render("users/show", {sortedMovies});
       }
   });
 },
