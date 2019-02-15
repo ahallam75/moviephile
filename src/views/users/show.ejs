@@ -40,17 +40,21 @@
           <h4 class="display text-left">Director:</h4>
         </section>
 
-        <section class="col-sm-4">
-          <h4 class="display text-left">Rating (0 - 100):</h4>
+        <section class="col-sm-2">
+          <h4 class="display text-left">Rating (1 - 100):</h4>
+        </section>
+
+        <section class="col-sm-2">
+            <h4 class="display text-left">Review:</h4>
         </section>
 
       </section>
 
-    <hr>
+      <hr>
 
       <section class="list-group"> 
         <% user.movies.forEach((movie) => { %>
-          
+        <hr>
         <section class="row">
         
           <section class="col">
@@ -65,11 +69,11 @@
             <p class="card-title"><%= movie.director %></p> 
           </section>
 
-          <section class="col">
-            <p class="card-title" ><%= movie.reviews.rating %></p> 
+          <section class="col" align="center">
+            <p class="card-title"><%= movie.reviews.rating %></p> 
           </section>
 
-          <section class="col">
+          <section class="col" align="center">
             <a href="/users/<%= movie.userId %>/movies/<%= movie.id %>/show" class="btn btn-outline-secondary">Review</a> 
           </section>
 
@@ -83,6 +87,8 @@
             </form>
           </section>
 
+          <hr>
+          
         </section>
 
       </section>

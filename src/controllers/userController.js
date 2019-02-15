@@ -59,7 +59,7 @@ module.exports = {
       res.redirect("/");
     },
 
-    /*
+    
 
    show(req, res, next){
        userQueries.getUser(req.params.id, (err, user) => {
@@ -68,43 +68,32 @@ module.exports = {
            req.flash("notice", "No user found with that ID");
            res.redirect("/");
          } else {
+           /*let sortedMovies = user.movies.sort( (a, b) => {
+             return b.user.reviews.rating - a.user.reviews.rating;
+           });*/
            res.render("users/show", {user});
+           //console.log("This is user: ", user)
          }
        });
-   } */
+   } 
     
-   /*show(req, res, next){
-    userQueries.getUser(req.params.id, (err, user) => {
-      if(err || user === undefined){
-        console.log("This is the err: ", err)
-        req.flash("notice", "No user found with that ID");
-        res.redirect("/");
-      } else {
-        movies.sort( (a, b) => {
-          a.reviews.rating - b.reviews.rating;
-        });
-        res.render("users/show", {user, movies})
-        
-      }
-    });
-  } */
-
+/*
   show(req, res, next){
     let sortedMovies = null;
     userQueries.getUser(req.params.id, (err, user) => {
       if(err || user === undefined){
+        //console.log("This is the err: ", err)
         req.flash("notice", "No user found with that ID");
         res.redirect("/");
       } else {
         sortedMovies = user.movies.sort( (a, b) => {
-          a.reviews.rating - b.reviews.rating;
+          //console.log("This is user: ", user)
+          return a.user.reviews.rating - b.user.reviews.rating;
         });
-  
         res.render("users/show", {user, sortedMovies});
-        
       }
     });
-  } 
+  }  */
     
 
   }
