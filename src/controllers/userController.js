@@ -68,11 +68,8 @@ module.exports = {
            req.flash("notice", "No user found with that ID");
            res.redirect("/");
          } else {
-           /*let sortedMovies = user.movies.sort( (a, b) => {
-             return b.user.reviews.rating - a.user.reviews.rating;
-           });*/
+           
            res.render("users/show", {user});
-           //console.log("This is user: ", user)
          }
        });
    } 
@@ -82,18 +79,20 @@ module.exports = {
     let sortedMovies = null;
     userQueries.getUser(req.params.id, (err, user) => {
       if(err || user === undefined){
-        //console.log("This is the err: ", err)
+        console.log("This is the err: ", err)
         req.flash("notice", "No user found with that ID");
         res.redirect("/");
       } else {
+        console.log("This is user: ", user)
+
         sortedMovies = user.movies.sort( (a, b) => {
-          //console.log("This is user: ", user)
           return a.user.reviews.rating - b.user.reviews.rating;
         });
+
         res.render("users/show", {user, sortedMovies});
       }
     });
-  }  */
-    
+  }  
+    */
 
   }
