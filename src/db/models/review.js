@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     }
-});
+}, {});
   Review.associate = function(models) {
     Review.belongsTo(models.Movie, {
       foreignKey: "movieId",

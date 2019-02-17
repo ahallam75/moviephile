@@ -50,24 +50,24 @@ module.exports = {
 
   getUser(id, callback){
     return User.findById(id, {
-
       include: [{
         model: Movie,
-        as: "movies", include: [
-          {model: Review, as: "reviews"}
+        as: "movies",
+        include: [
+          { model: Review, as: "reviews" }
         ]
-      }], 
+      }],
       order: [
-        [{model: Review, as: 'Review'}, 'rating', 'DESC']
+        [{ model: Movie, as: "movies" }, { model: Review, as: "reviews" }, 'rating', 'DESC']
       ]
     })
 
    .then((user) => {
-     console.log("This is user queries.user: ", user)
+     //console.log("This is user queries.user: ", user)
      callback(null, user);
    })
    .catch((err) => {
-    console.log("This is err queries.user: ", err)
+    //console.log("This is err queries.user: ", err)
      callback(err);
    })
  }
