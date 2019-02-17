@@ -63,11 +63,9 @@ module.exports = {
     })
 
    .then((user) => {
-     //console.log("This is user queries.user: ", user)
      callback(null, user);
    })
    .catch((err) => {
-    //console.log("This is err queries.user: ", err)
      callback(err);
    })
  }

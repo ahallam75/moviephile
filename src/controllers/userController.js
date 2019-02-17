@@ -63,7 +63,6 @@ module.exports = {
 
    show(req, res, next){
        userQueries.getUser(req.params.id, (err, user) => {
-         console.log("This is 'user' from usercontroller 'show': ", user)
          if(err || user === undefined){
            
            req.flash("notice", "No user found with that ID");
@@ -74,26 +73,5 @@ module.exports = {
          }
        });
    } 
-    
-/*
-  show(req, res, next){
-    let sortedMovies = null;
-    userQueries.getUser(req.params.id, (err, user) => {
-      if(err || user === undefined){
-        console.log("This is the err: ", err)
-        req.flash("notice", "No user found with that ID");
-        res.redirect("/");
-      } else {
-        console.log("This is user: ", user)
 
-        sortedMovies = user.movies.sort( (a, b) => {
-          return a.user.reviews.rating - b.user.reviews.rating;
-        });
-
-        res.render("users/show", {user, sortedMovies});
-      }
-    });
-  }  
-    */
-
-  }
+  } //Final curly brace.

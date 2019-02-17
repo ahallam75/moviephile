@@ -6,7 +6,6 @@ describe("Movie", () => {
 
   beforeEach((done) => {
 
-    //this.user;
     this.movie;
     sequelize.sync({force: true}).then((res) => {
 

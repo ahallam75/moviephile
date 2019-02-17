@@ -12,11 +12,8 @@ module.exports = {
       };
 
       reviewQueries.createReview(newReview, (err, review) => {
-        //console.log("This is 'newReview' from reviewController: ", newReview)
 
         if(err){
-          //console.log("This is 'err' from reviewController: ", err)
-
           req.flash("error", err);
           res.redirect(req.headers.referer);
         } else {

@@ -7,11 +7,9 @@ module.exports = {
   createReview(newReview, callback){
     return Review.create(newReview)
     .then((review) => {
-      //console.log("This is 'review' from queries.reviews: ", review)
       callback(null, review);
     })
     .catch((err) => {
-      //console.log("This is the 'err' from queries.reviews: ", err)
       callback(err);
     });
   },
