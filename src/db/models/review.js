@@ -3,11 +3,11 @@ module.exports = (sequelize, DataTypes) => {
   var Review = sequelize.define('Review', {
     body: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     rating: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: true
     },
     movieId: {
       type: DataTypes.INTEGER,

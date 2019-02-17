@@ -26,7 +26,7 @@ create(req, res, next){
           }
       });
 },
-/*
+
 show(req, res, next){
   movieQueries.getMovie(req.params.id, (err, movie) => {
       if(err || movie == null){
@@ -35,7 +35,7 @@ show(req, res, next){
           res.render("users/show", {movie});
       }
   });
-},*/
+},
 
 showTwo(req, res, next){
     movieQueries.getMovie(req.params.id, (err, movie) => {
