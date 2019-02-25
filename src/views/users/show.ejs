@@ -17,7 +17,7 @@
 
       <section class="col-lg-4">
         <p class="card-text">Click on the button below to add movies to your personalized movie list.</p>
-        <a href="/users/<%= user.id %>/movies/new" class="btn btn-primary">New Movie</a> 
+        <a href="/users/<%= user.id %>/movies/new" class="btn btn-primary">Add Movie</a> 
       </section>
 
       <hr>
@@ -41,11 +41,11 @@
         </section>
 
         <section class="col-sm-2">
-          <h4 class="display text-left">Rating (1 - 100):</h4>
+          <h4 class="display text-left">Movie Rating<br> (1 - 100):</h4>
         </section>
 
         <section class="col-sm-2">
-            <h4 class="display text-left">Review:</h4>
+            <h4 class="display text-left">Movie Review:</h4>
         </section>
 
       </section>
@@ -69,9 +69,15 @@
             <p class="card-title"><%= movie.director %></p> 
           </section>
 
-          <section class="col" align="center">
-            <p class="card-title"><%= movie.reviews.rating %></p> 
-          </section>
+          <% if (movie.reviews) { %>
+            <section class="col" align="center">
+              <p class="card-title"><%= movie.reviews.rating %></p>
+            </section>
+          <% } else { %>
+            <section class="col" align="center">
+              <p class="card-title">No Rating Yet</p>
+            </section>
+          <% } %>
 
           <section class="col" align="center">
             <a href="/users/<%= movie.userId %>/movies/<%= movie.id %>/show" class="btn btn-outline-secondary">Review</a> 
